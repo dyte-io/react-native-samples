@@ -1,8 +1,8 @@
 PODS:
-  - amazon-ivs-react-native-player (1.3.0):
-    - AmazonIVSPlayer (~> 1.13.0)
+  - amazon-ivs-react-native-player (1.4.1):
+    - AmazonIVSPlayer (~> 1.18.0)
     - React-Core
-  - AmazonIVSPlayer (1.13.0)
+  - AmazonIVSPlayer (1.18.0)
   - boost (1.76.0)
   - CocoaAsyncSocket (7.6.5)
   - DoubleConversion (1.1.6)
@@ -77,6 +77,7 @@ PODS:
     - FlipperKit/FlipperKitNetworkPlugin
   - fmt (6.2.1)
   - glog (0.3.5)
+  - JitsiWebRTC (111.0.2)
   - libevent (2.1.12)
   - OpenSSL-Universal (1.1.1100)
   - RCT-Folly (2021.06.28.00-v2):
@@ -286,7 +287,7 @@ PODS:
   - React-jsinspector (0.68.2)
   - React-logger (0.68.2):
     - glog
-  - react-native-core (0.5.0):
+  - react-native-core (0.6.1):
     - React-Core
   - react-native-document-picker (8.2.1):
     - React-Core
@@ -298,9 +299,10 @@ PODS:
     - RCTTypeSafety
     - React-Core
     - ReactCommon/turbomodule/core
-  - react-native-ui-kit (1.4.0):
+  - react-native-ui-kit (1.4.1):
     - React-Core
-  - react-native-webrtc (1.94.0):
+  - react-native-webrtc (111.0.3):
+    - JitsiWebRTC (~> 111.0.0)
     - React-Core
   - react-native-webview (11.26.1):
     - React-Core
@@ -465,6 +467,7 @@ SPEC REPOS:
     - Flipper-RSocket
     - FlipperKit
     - fmt
+    - JitsiWebRTC
     - libevent
     - OpenSSL-Universal
     - SocketRocket
@@ -559,8 +562,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  amazon-ivs-react-native-player: 5607f3b9a48aa3419b67377c1d5ffb80578ccbcc
-  AmazonIVSPlayer: 3c774902428c0893004c59c7bbf9065cc542327c
+  amazon-ivs-react-native-player: 68f2bbd53ecaeeeb666e42d0c1adf570283a1dbc
+  AmazonIVSPlayer: 15b74392987e2385f9a859201273185f76d58959
   boost: a7c83b31436843459a1961bfd74b96033dc77234
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: 831926d9b8bf8166fd87886c4abab286c2422662
@@ -577,6 +580,7 @@ SPEC CHECKSUMS:
   FlipperKit: cbdee19bdd4e7f05472a66ce290f1b729ba3cb86
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 476ee3e89abb49e07f822b48323c51c57124b572
+  JitsiWebRTC: 80f62908fcf2a1160e0d14b584323fb6e6be630b
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   RCT-Folly: 4d8508a426467c48885f1151029bc15fa5d7b3b8
@@ -592,12 +596,12 @@ SPEC CHECKSUMS:
   React-jsiexecutor: b7b553412f2ec768fe6c8f27cd6bafdb9d8719e6
   React-jsinspector: c5989c77cb89ae6a69561095a61cce56a44ae8e8
   React-logger: a0833912d93b36b791b7a521672d8ee89107aff1
-  react-native-core: 0632b4d19d43c6872a423d47bf99b5c200f62ff0
+  react-native-core: 9e2f5d0530c86df8be8c7e065b10f04768d753ca
   react-native-document-picker: 69ca2094d8780cfc1e7e613894d15290fdc54bba
   react-native-get-random-values: dee677497c6a740b71e5612e8dbd83e7539ed5bb
   react-native-safe-area-context: 99b24a0c5acd0d5dcac2b1a7f18c49ea317be99a
-  react-native-ui-kit: fcac37901de865c439dffda8387d6716f5a351cc
-  react-native-webrtc: e22646adc86f2009328b21eb0e40ca404c77258c
+  react-native-ui-kit: b220f8d362a3f3ad2341268c173584d38d3b84d3
+  react-native-webrtc: 4d1669c2ed29767fe70b0169428b4466589ecf8b
   react-native-webview: 9f111dfbcfc826084d6c507f569e5e03342ee1c1
   React-perflogger: a18b4f0bd933b8b24ecf9f3c54f9bf65180f3fe6
   React-RCTActionSheet: 547fe42fdb4b6089598d79f8e1d855d7c23e2162
