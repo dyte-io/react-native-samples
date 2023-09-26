@@ -4,6 +4,7 @@
   "expo": {
     "version": "0.0.1",
     "CFBundleShortVersionString": "0.0.1",
+    "plugins": ["@dytesdk/react-native-core"],
     "extra": {
       "eas": {
         "projectId": "1eb8f81d-6b23-49af-800e-9619ee2b3956"
