@@ -4,12 +4,9 @@ import {
   DyteLogo,
   DyteText,
   DyteUIProvider,
-  getBrandColorWithCode,
-  getColorWithCode,
-  provideDyteDesignSystem,
   States,
 } from '@dytesdk/react-native-ui-kit';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -230,36 +227,7 @@ function ChooseTheme({onTheme}: {onTheme: any}) {
     brand: '#2160FD',
     background: '#080808',
   });
-  const {colors} = useSelector(
-    (state: States) => state.DyteDesign.states.designSystem,
-  );
 
-  useEffect(() => {
-    provideDyteDesignSystem({
-      colors: {
-        ...colors,
-        brand: {
-          700: getBrandColorWithCode(theme.brand, 700),
-          600: getBrandColorWithCode(theme.brand, 600),
-          500: getBrandColorWithCode(theme.brand, 500),
-          400: getBrandColorWithCode(theme.brand, 400),
-          300: getBrandColorWithCode(theme.brand, 300),
-        },
-        background: {
-          1000: getColorWithCode(theme.background, 1000),
-          900: getColorWithCode(theme.background, 900),
-          800: getColorWithCode(theme.background, 800),
-          700: getColorWithCode(theme.background, 700),
-          600: getColorWithCode(theme.background, 600),
-        },
-        text:
-          theme.name === 'pink' || theme.name === 'green'
-            ? colors.videoBg
-            : '#FFFFFF',
-      },
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [theme]);
   const styles = StyleSheet.create({
     container: {
       alignItems: 'center',
@@ -404,7 +372,7 @@ export default function () {
           <DyteLogo style={{width: 100}} />
           <CreateMeeting onCreate={(config: any) => setStates(config)} />
           <JoinMeeting onJoin={(config: any) => setStates(config)} />
-          <ChooseTheme onTheme={(color: any) => setTheme(color)} />
+          {/* <ChooseTheme onTheme={(color: any) => setTheme(color)} /> */}
         </ScrollView>
       </DyteUIProvider>
     );
