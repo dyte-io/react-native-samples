@@ -2,7 +2,7 @@
 import React from 'react';
 import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
 import {useDyteClient, DyteProvider} from '@dytesdk/react-native-core';
-import {DyteMeeting} from '@dytesdk/react-native-ui-kit';
+import {DyteMeeting, DyteUIProvider} from '@dytesdk/react-native-ui-kit';
 import {useSelector} from 'react-redux';
 
 export default function Meeting({
@@ -108,7 +108,9 @@ export default function Meeting({
   }
   return (
     <DyteProvider value={client}>
-      <DyteMeeting meeting={client} applyDesignSystem={false} />
+      <DyteUIProvider>
+        <DyteMeeting meeting={client} applyDesignSystem={false} />
+      </DyteUIProvider>
     </DyteProvider>
   );
 }
