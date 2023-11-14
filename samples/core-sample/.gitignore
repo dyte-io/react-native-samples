@@ -1,7 +1,7 @@
 # OSX
 #
 .DS_Store
-.vscode/
+.vscode
 
 # Xcode
 #
@@ -61,5 +61,7 @@ buck-out/
 /ios/Pods/
 /vendor/bundle/
 
-# Meeting Creds
-src/secrets/creds.tsx
+.bundle
+__tests__
+.watchmanconfig
+yarn.lock

@@ -4,9 +4,12 @@ import {
   DyteLogo,
   DyteText,
   DyteUIProvider,
+  provideDyteDesignSystem,
   States,
+  generateBackgroundColors,
+  generateBrandColors,
 } from '@dytesdk/react-native-ui-kit';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -77,7 +80,8 @@ function CreateMeeting({onCreate}: {onCreate: any}) {
       justifyContent: 'space-evenly',
       borderBottomWidth: 1,
       paddingBottom: 50,
-      borderColor: 'rgba(255,255,255,0.3)',
+      borderColor: colors.text,
+      backgroundColor: colors.background[1000],
     },
     inputField: {
       marginVertical: 10,
@@ -89,6 +93,7 @@ function CreateMeeting({onCreate}: {onCreate: any}) {
       borderWidth: 0.5,
       backgroundColor: colors.background[600],
       padding: 16,
+      borderColor: colors.text,
       color: colors.text,
     },
   });
@@ -140,7 +145,8 @@ function JoinMeeting({onJoin}: {onJoin: any}) {
       marginTop: 16,
       borderBottomWidth: 1,
       paddingBottom: 50,
-      borderColor: 'rgba(255,255,255,0.3)',
+      borderColor: colors.text,
+      backgroundColor: colors.background[1000],
     },
     inputField: {
       marginVertical: 10,
@@ -153,6 +159,7 @@ function JoinMeeting({onJoin}: {onJoin: any}) {
       backgroundColor: colors.background[600],
       padding: 16,
       color: colors.text,
+      borderColor: colors.text,
     },
   });
   const joinMeeting = async () => {
@@ -227,12 +234,30 @@ function ChooseTheme({onTheme}: {onTheme: any}) {
     brand: '#2160FD',
     background: '#080808',
   });
-
+  const {colors} = useSelector(
+    (state: States) => state.DyteDesign.states.designSystem,
+  );
+  useEffect(() => {
+    provideDyteDesignSystem({
+      colors: {
+        ...colors,
+        brand: generateBrandColors(theme.brand),
+        background: generateBackgroundColors(theme.background),
+        text:
+          theme.name === 'pink' || theme.name === 'green'
+            ? colors.videoBg
+            : '#FFFFFF',
+      },
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [theme]);
   const styles = StyleSheet.create({
     container: {
       alignItems: 'center',
       justifyContent: 'flex-start',
       marginTop: 16,
+      marginBottom: 50,
+      backgroundColor: colors.background[1000],
     },
     themeBox: {
       flexDirection: 'row',
@@ -360,19 +385,20 @@ export default function () {
     authToken: '',
     startMeeting: false,
   });
-  const [theme, setTheme] = useState('#0B0B0B');
+  const [theme, setTheme] = useState('#080808');
   if (!states.startMeeting) {
     return (
       <DyteUIProvider>
         <ScrollView
           style={{
             flex: 1,
+            paddingTop: 50,
             backgroundColor: theme,
           }}>
-          <DyteLogo style={{width: 100}} />
+          <DyteLogo style={{width: 100, backgroundColor: theme}} />
           <CreateMeeting onCreate={(config: any) => setStates(config)} />
           <JoinMeeting onJoin={(config: any) => setStates(config)} />
-          {/* <ChooseTheme onTheme={(color: any) => setTheme(color)} /> */}
+          <ChooseTheme onTheme={(color: any) => setTheme(color)} />
         </ScrollView>
       </DyteUIProvider>
     );
@@ -382,7 +408,10 @@ export default function () {
         <Meeting
           authToken={states.authToken}
           roomName={undefined}
-          onEnded={() => setStates({...states, startMeeting: false})}
+          onEnded={() => {
+            setStates({...states, startMeeting: false});
+            setTheme('#080808');
+          }}
         />
       </DyteUIProvider>
     );
