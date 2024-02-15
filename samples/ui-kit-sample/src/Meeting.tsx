@@ -58,9 +58,6 @@ export default function Meeting({
       backgroundColor: '#0000',
     },
   });
-  if (client) {
-    console.log(client.self.mediaPermissions);
-  }
   if (!client) {
     return (
       <View style={styles.loadingScreen}>
