@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useEffect, useState } from 'react';
-import { MediaStream, RTCView } from 'react-native-webrtc';
+import { MediaStream, RTCView } from '@dyteinternals/react-native-webrtc';
 import { ActivityIndicator, View } from 'react-native';
 import UserAvatar from 'react-native-user-avatar';
 import { useRef } from 'react';
