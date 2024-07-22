@@ -45,7 +45,7 @@ export default function Meeting({
   }, []);
   React.useEffect(() => {
     client?.self.addListener('roomLeft', () => onEnded());
-    () => {
+    return () => {
       client?.self.removeListener('roomLeft', () => onEnded());
     };
   }, [client]);
@@ -106,7 +106,11 @@ export default function Meeting({
   return (
     <DyteProvider value={client}>
       <DyteUIProvider>
-        <DyteMeeting meeting={client} applyDesignSystem={false} />
+        <DyteMeeting
+          meeting={client}
+          applyDesignSystem={false}
+          iOSScreenshareEnabled={true}
+        />
       </DyteUIProvider>
     </DyteProvider>
   );
