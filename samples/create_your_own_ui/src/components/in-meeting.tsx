@@ -13,6 +13,8 @@ import MeetingHeader from './meeting-header';
 import MeetingControlBar from './meeting-control-bar';
 import MeetingSideBar from './meeting-sidebar';
 import {View} from 'react-native';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import ActiveSpeakerGrid from './active-speaker-grid';
 
 function InMeeting({
   meeting,
@@ -27,7 +29,6 @@ function InMeeting({
 }) {
   const stateUpdate = (e: any) => {
     const newStateUpdate = e;
-    console.log('dyteStateUpdateSetup:: ', newStateUpdate);
     setStates((oldState: CustomStates) => {
       return {
         ...oldState,
@@ -48,13 +49,14 @@ function InMeeting({
         />
       </View>
       <View
-        className="flex-1"
+        className="flex-1 justify-center items-center"
         // eslint-disable-next-line react-native/no-inline-styles
         style={{
           backgroundColor: '#272727',
           // color: '#ffffff',
         }}>
         <DyteGrid meeting={meeting} config={config} states={states} />
+        {/* <ActiveSpeakerGrid meeting={meeting} /> */}
         <DyteNotifications
           meeting={meeting}
           config={config}
