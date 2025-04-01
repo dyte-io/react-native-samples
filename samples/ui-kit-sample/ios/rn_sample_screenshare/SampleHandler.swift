@@ -2,6 +2,6 @@ import ReactNativeCore
 
 class SampleHandler: DyteScreenshareHandler {
  override init() {
-   super.init(appGroupIdentifier: "group.com.example.reactnativecore.dyte", bundleIdentifier: "io.dyte.react-native.ios.rn_sample_screenshare")
+   super.init(appGroupIdentifier: "group.io.dyte.react-native", bundleIdentifier: "org.reactjs.native.example.rn-sample-app-1.rn-sample-screenshare")
  }
 }
