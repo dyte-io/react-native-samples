@@ -4,7 +4,6 @@ import MeetingTile from '../components/MeetingTile';
 import creds from '../creds';
 import { ScrollView, Text } from 'react-native';
 import { useDyteClient } from '@dytesdk/react-native-core';
-import token from '../token.json';
 
 export default function Meetings({
   meetStates,
@@ -49,6 +48,37 @@ export default function Meetings({
       });
     }
   }, [meetStates, meeting]);
+  const getToken = async (meetingCode: string) => {
+    const Buffer = require('buffer').Buffer;
+    const ORG_ID = creds.ORG_ID;
+    const API_KEY = creds.API_KEY;
+    const base64EncodedString = Buffer.from(`${ORG_ID}:${API_KEY}`).toString(
+      'base64',
+    );
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Basic ' + base64EncodedString,
+      },
+      body: JSON.stringify({
+        name: 'Sample User',
+        preset_name: 'group_call_host',
+        custom_participant_id: `${Math.floor(Math.random() * 1000000)}`,
+      }),
+    };
+    try {
+      const reqResp = await fetch(
+        `https://api.dyte.io/v2/meetings/${meetingCode}/participants`,
+        options,
+      );
+      const meetResp = await reqResp.json();
+      const token = meetResp.data.token;
+      return token;
+    } catch (err) {}
+    return '';
+  };
+
   if (!apiMeetings) {
     return <></>;
   }
@@ -63,11 +93,10 @@ export default function Meetings({
             <MeetingTile
               key={index}
               meeting={apiMeeting}
-              // eslint-disable-next-line @typescript-eslint/no-unused-vars
               onClick={async apiMeet => {
-                // TODO: Get a token here
+                const token = await getToken(apiMeet.id);
                 initMeeting({
-                  authToken: token.authToken,
+                  authToken: token,
                   defaults: {
                     audio: true,
                     video: true,

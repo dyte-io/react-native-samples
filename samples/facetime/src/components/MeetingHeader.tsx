@@ -1,8 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import UserAvatar from 'react-native-user-avatar';
-// import { DyteClock } from '@dytesdk/react-native-ui-kit';
-import { useDyteSelector } from '@dytesdk/react-native-core';
 
 interface MeetingHeaderProps {
   userName: string;
@@ -14,14 +12,8 @@ interface MeetingHeaderProps {
 const MeetingHeader: React.FC<MeetingHeaderProps> = ({
   userName,
   userSubtitle,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  meeting,
   avatarUrl,
 }) => {
-  const { roomJoined } = useDyteSelector(m => m.self);
-  if (!roomJoined) {
-    return <></>;
-  }
   return (
     <View className="flex-row items-center p-2 m-4 border-transparent rounded-md border-1 border-gray-200">
       <UserAvatar
