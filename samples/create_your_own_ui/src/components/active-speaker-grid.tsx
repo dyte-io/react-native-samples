@@ -13,13 +13,13 @@ function ActiveSpeakerGrid({meeting}: {meeting: DyteClient}) {
   const dimensions = Dimensions.get('window');
   useEffect(() => {
     const handleActiveSpeaker = (participant: any) => {
-      console.log(`${participant.peerId} is currently speaking`);
+      // console.log(`${participant.peerId} is currently speaking`);
       const active =
         meeting
           .participants!.joined.toArray()
           .find(p => p.id === participant.peerId) ?? meeting.self;
       if (active) {
-        console.log('Set current: ', active);
+        // console.log('Set current: ', active);
         setParticipant(active);
       }
     };
@@ -28,7 +28,6 @@ function ActiveSpeakerGrid({meeting}: {meeting: DyteClient}) {
       meeting.participants.off('activeSpeaker', handleActiveSpeaker);
     };
   }, [meeting]);
-  // console.log('Current: ', currentParticipant);
   return (
     <View className="flex justify-center items-center h-screen">
       <View className="flex justify-center items-center">

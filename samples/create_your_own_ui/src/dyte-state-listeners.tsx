@@ -37,7 +37,6 @@ export class DyteStateListenersUtils {
         ...newState,
       };
     });
-    console.log(newState);
   }
   private roomJoinedListener = () => {
     this.updateStates({meeting: 'joined'});

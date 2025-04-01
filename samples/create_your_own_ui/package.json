@@ -7,12 +7,13 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "postinstall": "patch-package"
   },
   "dependencies": {
-    "@dyteinternals/react-native-webrtc": "^114.0.14",
-    "@dytesdk/react-native-core": "^0.10.2",
-    "@dytesdk/react-native-ui-kit": "^1.9.6-staging.1",
+    "@dyteinternals/react-native-webrtc": "^114.0.16",
+    "@dytesdk/react-native-core": "^1.0.2",
+    "@dytesdk/react-native-ui-kit": "^1.10.0",
     "nativewind": "^2.0.11",
     "react": "18.1.0",
     "react-native": "0.70.10",
@@ -40,6 +41,8 @@
     "eslint": "^7.32.0",
     "jest": "^26.6.3",
     "metro-react-native-babel-preset": "0.72.3",
+    "patch-package": "^8.0.0",
+    "postinstall-postinstall": "^2.1.0",
     "react-test-renderer": "18.1.0",
     "tailwindcss": "^3.3.2",
     "typescript": "^4.8.3"

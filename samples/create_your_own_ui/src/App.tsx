@@ -10,7 +10,6 @@ import {
   defaultConfig,
   generateConfig,
 } from '@dytesdk/react-native-ui-kit';
-import {DyteThemePresetV1} from '@dytesdk/web-core';
 import {DyteStateListenersUtils} from './dyte-state-listeners';
 import {CustomStates} from './types';
 import CustomDyteMeeting from './components/custom-dyte-meeting';
@@ -58,7 +57,7 @@ function Meeting() {
   useEffect(() => {
     async function setupMeetingConfigs() {
       const theme = meeting!.self.config;
-      const generatedConfig = generateConfig(theme as DyteThemePresetV1, {});
+      const generatedConfig = generateConfig(theme, {});
       const newConfig = generatedConfig.config;
       /**
        * NOTE(ravindra-dyte):
@@ -109,7 +108,7 @@ function App() {
   useEffect(() => {
     async function initalizeMeeting() {
       const authToken =
-        'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdJZCI6IjM5MGJmMjc0LTQxMzMtNDI2ZC04NDkxLWVhN2ExYTE5MDQ4YiIsIm1lZXRpbmdJZCI6ImJiYjU0MzMzLWJmNDgtNDgwMC04ZDU3LWVmNzIwOWY1MDlhNCIsInBhcnRpY2lwYW50SWQiOiJhYWFiMGNjOC1kZTg5LTQwYzMtYWRmMi0wZTUxMmViZDZhNjkiLCJwcmVzZXRJZCI6IjJhZWI3Y2RhLWYxNGUtNDVlMC05MDk3LTM1ZWI3ODhjYzZjMiIsImlhdCI6MTcyMTYyNTgzMywiZXhwIjoxNzMwMjY1ODMzfQ.ko9H_AN1g_PSlzUUL9P5xK641I_ysraSnpWKsf-RrdkRcVXK06nZUB0NAsMva90uwZGVg23jWOgIkzD9nmkaB1lMMt3nEEWuPaOyei1NxbzccX9kE9fhbAxoBC2WgEBvmHxc0XDhs5s1irQgIhCqej45uA9L1vP9D4yWtcGUDm4ClCw9RwF0sJs_EfogySVCebLV07VqivxytUJE_clCGGCWq3ujM5CcYItbJolqhPURtJ8IlXjGkIawd9VCAr7K5XzWD4LARpu1jgWUhR1sdpQ6TWQQgjTlz0vfhjUDmorvu_ZuDi7b-fEKhwkcd0sHq2I-8lpK_It9F-urQOqrOw';
+        'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdJZCI6IjcyNzNmYzAwLTAzY2MtNGMwNC1iZTliLTk4YzhhYmE4OTQxZSIsIm1lZXRpbmdJZCI6ImJiYmMyNzdkLTIzZTAtNDI4ZC1hNjE1LTNmNDgwZDBiOWJiZCIsInBhcnRpY2lwYW50SWQiOiJhYWExNDAzNi1mNmEyLTRlN2ItOTEwNS0yM2Q5ZDAwZDJjNTYiLCJwcmVzZXRJZCI6Ijg0ZWVjMTYxLWVmOWQtNGZlMi1iZTEzLTZkMDJlM2UwOTU5NSIsImlhdCI6MTc0MTY2OTk0OCwiZXhwIjoxNzUwMzA5OTQ4fQ.VsJq7dK0G9zjwD69Y-Ul855mjwhmDvtqjZpj-SIm4V2IUlSaOEyeaahvGfiE76PyJZNiBgNkih-bC8O349cebGsERIV2HXMf7V0f0QiPjypv7Q2V1_mn19yZgxOThwwa4U8ubKunVQnVPLKQVMbgqBBargqq2mFDXDPD3SzoOSO-X0afYvYa98BR7Li6vCQ0mO_60cf1bKbYaqNVvyqxiKbLOahquONz1_dxKSZGHD2CCj8lE6NgdSUmx3lBil8ZwVD9nIMfruGfOGeOMLjW_A0m3zdqfYhTCa1dAIrPXYnGl2oBueI1AZu5uJdKiVdOMpJFuuj3lz6jPDquvy7F-Q';
 
       if (!authToken) {
         console.log(
@@ -124,7 +123,6 @@ function App() {
           audio: true,
           video: true,
         },
-        modules: {devTools: {logs: true}},
       });
     }
 

@@ -58,7 +58,9 @@ export function CustomSetupScreenWithPrebuiltMediaPreviewModal({
   states: CustomStates;
   setStates: SetStates;
 }) {
-  const [participantName, setParticipantName] = useState('');
+  const [participantName, setParticipantName] = useState(
+    meeting.self?.name ?? 'Your Name',
+  );
   useEffect(() => {
     if (!meeting) {
       return;
@@ -96,7 +98,7 @@ export function CustomSetupScreenWithPrebuiltMediaPreviewModal({
           <View className="flex flex-row items-center justify-center w-3/4 my-2">
             <DyteTextField
               disabled={!meeting.self.permissions.canEditDisplayName}
-              placeholder={'Your Name'}
+              placeholder={meeting.self?.name ?? 'Your Name'}
               onChangeText={s => {
                 setParticipantName(s);
               }}
@@ -183,8 +185,12 @@ export function CustomSetupScreenWithCustomMediaPreviewModal({
           <View className="flex flex-row items-center justify-center w-3/4 my-2">
             <DyteTextField
               disabled={!meeting.self.permissions.canEditDisplayName}
-              placeholder="Your name"
+              placeholder={meeting.self?.name ?? 'Your Name'}
               onChangeText={s => setParticipantName(s)}
+              // eslint-disable-next-line react-native/no-inline-styles
+              style={{
+                width: '100%',
+              }}
             />
           </View>
           <View className="flex flex-row items-center justify-center w-3/4">
