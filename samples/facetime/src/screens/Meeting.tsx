@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { DyteProvider } from '@dytesdk/react-native-core';
-import { DyteUIProvider, DyteText } from '@dytesdk/react-native-ui-kit';
+import { useDyteSelector } from '@dytesdk/react-native-core';
+import { DyteUIProvider, DyteSpinner } from '@dytesdk/react-native-ui-kit';
 import MeetingHeader from '../components/MeetingHeader';
 import DyteClient from '@dytesdk/web-core';
 import Grid from '../components/Grid';
@@ -13,6 +13,7 @@ type MeetingProps = {
 };
 export default function Meeting({ meeting, meetStates }: MeetingProps) {
   const [isVisible, setIsVisible] = useState(true);
+  const { roomJoined } = useDyteSelector(m => m.self);
   const fadeAnim = useRef(new Animated.Value(1)).current;
   const toggleVisibility = () => {
     Animated.timing(fadeAnim, {
@@ -38,33 +39,35 @@ export default function Meeting({ meeting, meetStates }: MeetingProps) {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  if (!meeting.self.roomJoined) {
-    <DyteText>Room not joined</DyteText>;
-  }
   return (
-    <DyteProvider value={meeting}>
-      <DyteUIProvider>
-        <View className="flex-1">
-          {/* Overlay Components */}
-          {isVisible && (
-            <Animated.View
-              style={{ opacity: fadeAnim }}
-              className="absolute top-0 left-0 right-0 z-10">
-              <MeetingHeader
-                meeting={meeting}
-                userName={'Mayank'}
-                userSubtitle={'FaceTime Call'}
-              />
-              <ControlBar meeting={meeting} />
-            </Animated.View>
-          )}
-
-          {/* Full-Screen Component */}
+    <DyteUIProvider>
+      <>
+        {roomJoined ? (
           <View className="flex-1">
-            <Grid meeting={meeting} onTap={toggleVisibility} />
+            {/* Overlay Components */}
+            {isVisible && (
+              <Animated.View
+                style={{ opacity: fadeAnim }}
+                className="absolute top-0 left-0 right-0 z-10">
+                <MeetingHeader
+                  meeting={meeting}
+                  userName={meeting?.self?.name ?? 'Adam'}
+                  userSubtitle={'FaceTime Call'}
+                />
+                <ControlBar meeting={meeting} />
+              </Animated.View>
+            )}
+            {/* Full-Screen Component */}
+            <View className="flex-1">
+              <Grid meeting={meeting} onTap={toggleVisibility} />
+            </View>
           </View>
-        </View>
-      </DyteUIProvider>
-    </DyteProvider>
+        ) : (
+          <View className="flex-1 flex-row justify-center align-center">
+            <DyteSpinner />
+          </View>
+        )}
+      </>
+    </DyteUIProvider>
   );
 }

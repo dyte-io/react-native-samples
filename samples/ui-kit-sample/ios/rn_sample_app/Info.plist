@@ -52,7 +52,9 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>For people to share, we need access to your photos.</string>
 	<key>RTCAppGroupIdentifier</key>
-	<string>group.com.example.reactnativecore.dyte</string>
+	<string>group.io.dyte.react-native</string>
+	<key>RTCAppScreenSharingExtension</key>
+	<string>org.reactjs.native.example.rn-sample-app-1.rn-sample-screenshare</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>

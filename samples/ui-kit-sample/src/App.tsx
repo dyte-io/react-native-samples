@@ -5,11 +5,11 @@ import {
   DyteText,
   DyteUIProvider,
   provideDyteDesignSystem,
-  States,
   generateBackgroundColors,
   generateBrandColors,
+  DyteUIContext,
 } from '@dytesdk/react-native-ui-kit';
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   KeyboardAvoidingView,
   Platform,
@@ -19,7 +19,6 @@ import {
   TouchableHighlight,
   View,
 } from 'react-native';
-import {useSelector} from 'react-redux';
 import Meeting from './Meeting';
 import {creds} from './secrets/creds';
 
@@ -450,9 +449,8 @@ function MeetingDashboard({
 }) {
   const {states, setStates} = meetStates;
   const {theme, setTheme} = meetTheme;
-  const {colors} = useSelector(
-    (state: States) => state.DyteDesign.states.designSystem,
-  );
+  const {storeStates} = useContext(DyteUIContext);
+  const colors = storeStates.designSystem?.colors;
   const themes = [
     {
       name: 'blue',
@@ -485,7 +483,7 @@ function MeetingDashboard({
           background: generateBackgroundColors(themeObj.background),
           text:
             themeObj.name === 'pink' || themeObj.name === 'green'
-              ? colors.videoBg
+              ? colors?.videoBg
               : '#FFFFFF',
         },
       });

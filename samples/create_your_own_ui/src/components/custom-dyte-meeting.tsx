@@ -46,7 +46,6 @@ function CustomDyteMeeting({
   }
 
   if (states.meeting === 'waiting') {
-    console.log('Waiting...');
     return (
       <WaitingRoom
         meeting={meeting}
@@ -58,7 +57,6 @@ function CustomDyteMeeting({
   }
 
   if (states.meeting === 'joined') {
-    console.log('Joined...');
     return (
       <InMeeting
         meeting={meeting}

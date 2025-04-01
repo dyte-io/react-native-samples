@@ -37,7 +37,6 @@ function InMeeting({
     });
   };
   const t = useLanguage();
-  console.log(3);
   return (
     <View className="flex w-full h-full">
       <View className="flex-0 flex-shrink">

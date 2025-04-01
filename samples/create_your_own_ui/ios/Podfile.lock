@@ -225,9 +225,9 @@ PODS:
     - React-Core
   - react-native-safe-area-context (4.10.8):
     - React-Core
-  - react-native-ui-kit (1.9.6-staging.1):
+  - react-native-ui-kit (1.10.0):
     - React-Core
-  - react-native-webrtc (114.0.14):
+  - react-native-webrtc (114.0.16):
     - DyteWebRTC (= 0.0.4)
     - React-Core
   - react-native-webview (13.10.4):
@@ -298,7 +298,7 @@ PODS:
     - React-jsi (= 0.70.10)
     - React-logger (= 0.70.10)
     - React-perflogger (= 0.70.10)
-  - ReactNativeCore (0.10.2):
+  - ReactNativeCore (1.0.2):
     - React-Core
   - RNFileViewer (2.1.5):
     - React-Core
@@ -447,32 +447,32 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  boost: a7c83b31436843459a1961bfd74b96033dc77234
+  boost: 1317cc515acaff15b6b9d0355166824a75dc8976
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
   DyteWebRTC: a6abe1b2cc3ecf66a2a0adc07ada8d851647cfa6
   FBLazyVector: 4d79ff044f28bf8ebf735074332e7a6c54e268f0
   FBReactNativeSpec: 944ea69e5efe4e94a63e0ceaf9bfdad6515aaf84
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
-  RCT-Folly: 0080d0a6ebf2577475bda044aa59e2ca1f909cda
+  RCT-Folly: fd2673f5bfadb2a8173799b6965b892a67ae31d9
   RCTRequired: 23f0d5d0dea22af22f30f146e090a7d16e6b8be7
   RCTTypeSafety: ca3de65d46a130875bf7816788998f13525f3235
   React: 5000106ef4132dad19f8a68dae76c987a5e33182
   React-bridging: d0b73f09bb4c83eb2e518ce28cb6ebedd4228ff1
   React-callinvoker: 6b14487211b7378f68602bbf2b3ae6513259339d
   React-Codegen: 49c45568b87b87ca4983c308df51e2aeeede5b44
-  React-Core: 9348315d44f12995a55ee5d61b0f81a8829b2bfe
+  React-Core: 10515e34b6b790898ad046598d67ed38a3b7db79
   React-CoreModules: 371d09d749b983527ac15d8368b49df7ce77ada9
-  React-cxxreact: d1b7e6da62d6968d1c8d46c3bb39372c3131d09e
-  React-jsi: c2cef15ce81a1150fac10e0b3f6ad9803bdec51b
-  React-jsiexecutor: 1457c7bb2f08f257e6b5ece8b62348da43c4ccf2
+  React-cxxreact: 4ce4852cdc00ce7dbf4b28c5b56e300f8ba88cdc
+  React-jsi: 067b06c315d50821d9977d2f8aef7104ab292585
+  React-jsiexecutor: eb5c989d256412f7d48851eee16d4fb791293d4c
   React-jsinspector: 2a1985769123b199c195a96f46478b35db139712
-  React-logger: 7fbdc3576b2ed3834360c8ea3c1c2ec54ac3043a
-  react-native-document-picker: 5b97e24a7f1a1e4a50a72c540a043f32d29a70a2
-  react-native-safe-area-context: b7daa1a8df36095a032dff095a1ea8963cb48371
-  react-native-ui-kit: 8b9a1a92a96f76df2e216a0dabd064d52a75f64e
-  react-native-webrtc: df7e62f71b935a6d1d0e9d5231aa7e5b14c70f62
-  react-native-webview: 625925488f70034d18162509da93c320a8a56325
+  React-logger: d6b8c2a104ac0c237408297085a3f59d6bd514ca
+  react-native-document-picker: 6b08d834d4e4252bb8aad13d852e27666294b5b9
+  react-native-safe-area-context: b72c4611af2e86d80a59ac76279043d8f75f454c
+  react-native-ui-kit: 0f9dd03049f8051c6d8c7bd60c85221ecd27de7d
+  react-native-webrtc: 93311d7d18dc4a7a6abeae042c6cc30ce892056c
+  react-native-webview: 3cd1ac37de33ed2c0456e45668fe6e38a3a0346e
   React-perflogger: f86e85eb59151d09e9b44b8931f5c088e4f08bbc
   React-RCTActionSheet: cd3d76501a6069e164986b93f144be34b593955c
   React-RCTAnimation: 2d09db635202e5d6f66de596f5a6b38389fe76ec
@@ -484,14 +484,14 @@ SPEC CHECKSUMS:
   React-RCTText: e1ee68343ccaa3f03a84b48b513fdf59b01bc97d
   React-RCTVibration: 0b23ba09f2f6671a1ddee3c37d27b772b9448346
   React-runtimeexecutor: 77aa3714a353cfb1a5f5e315e8af5154cd3d9402
-  ReactCommon: a29dac86d7219579db079cef8f380ebffe1ba545
-  ReactNativeCore: 9116a94b73803704431cd523dbd218261fb54d78
-  RNFileViewer: ce7ca3ac370e18554d35d6355cffd7c30437c592
-  RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
-  RNSoundPlayer: 5dabb50ed0cca3808997c91c4f6bbc6d576e2e46
-  RNSVG: d7d7bc8229af3842c9cfc3a723c815a52cdd1105
+  ReactCommon: 8cae60fb5f3081673450e3ac1be996a33f81b64c
+  ReactNativeCore: fb30527e294006a27136e82278f84db32093d270
+  RNFileViewer: 4b5d83358214347e4ab2d4ca8d5c1c90d869e251
+  RNFS: 89de7d7f4c0f6bafa05343c578f61118c8282ed8
+  RNSoundPlayer: 4c87665c7520851d58e66403f87d58e233cb51fa
+  RNSVG: d7cb8bd34550cf4c4fc7edd7ac627905e2b71f3f
   Yoga: 0518155cfbcc68c56223422f6a20a71b82e307d2
 
-PODFILE CHECKSUM: 5333c6e5fc488c7506bbbcd36fe47c6babf5474d
+PODFILE CHECKSUM: a8b03788f6c53aef7a1382b0568e164ce9fb1dce
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2

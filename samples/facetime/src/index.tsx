@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Contacts from './screens/Contacts';
 import Meeting from './screens/Meeting';
 import DyteClient from '@dytesdk/web-core';
+import { DyteProvider } from '@dytesdk/react-native-core';
 
 type States = {
   callState: string;
@@ -19,6 +20,10 @@ export default function DyteFacetime() {
   if (states.callState === 'ended') {
     return <Contacts meetStates={{ states, setStates }} />;
   } else {
-    return <Meeting meeting={states.call} meetStates={{ states, setStates }} />;
+    return (
+      <DyteProvider value={states.call}>
+        <Meeting meeting={states.call} meetStates={{ states, setStates }} />
+      </DyteProvider>
+    );
   }
 }

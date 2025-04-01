@@ -87,13 +87,12 @@ function VideoPreviewWithCustomUI({
   };
   const styles = StyleSheet.create({
     dropdown: {
-      backgroundColor: meeting.self.videoEnabled
-        ? colors.background![800]
-        : colors.background![600],
+      backgroundColor: colors.background![800],
       marginLeft: 0,
       marginRight: 10,
       alignItems: 'center',
       borderRadius: 5,
+      width: '90%',
     },
     dropdownContainer: {
       borderColor: colors.background![800],
@@ -167,7 +166,6 @@ function VideoPreviewWithCustomUI({
               labelField={'label'}
               valueField={'value'}
               value={currentDeviceIndex}
-              disable={!meeting.self.videoEnabled}
               onChange={selectVideo}
             />
           </View>

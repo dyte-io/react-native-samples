@@ -1,9 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from 'react';
+import React, {useContext} from 'react';
 import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
 import {useDyteClient, DyteProvider} from '@dytesdk/react-native-core';
-import {DyteMeeting, DyteUIProvider} from '@dytesdk/react-native-ui-kit';
-import {useSelector} from 'react-redux';
+import {DyteMeeting, DyteUIContext} from '@dytesdk/react-native-ui-kit';
 
 export default function Meeting({
   authToken,
@@ -17,9 +16,8 @@ export default function Meeting({
   const [client, initClient] = useDyteClient();
   const _authToken = authToken;
   const _roomName = roomName;
-  const {colors} = useSelector(
-    (state: any) => state.DyteDesign.states.designSystem,
-  );
+  const {storeStates} = useContext(DyteUIContext);
+  const {colors} = storeStates.designSystem;
   React.useEffect(() => {
     const load = async () => {
       if (roomName) {
@@ -66,17 +64,18 @@ export default function Meeting({
           style={{
             marginRight: 10,
             color:
-              colors.background === '#FFFCF8' || colors.background === '#FFFFFF'
-                ? colors.videoBg
-                : colors.text,
+              colors.background[1000] === '#FFFCF8' ||
+              colors?.background[1000] === '#FFFFFF'
+                ? colors?.videoBg
+                : colors?.text,
           }}>
           Loading
         </Text>
         <ActivityIndicator
           color={
-            colors.background === '#FFFCF8' || colors.background === '#FFFFFF'
-              ? colors.videoBg
-              : colors.text
+            colors?.background === '#FFFCF8' || colors?.background === '#FFFFFF'
+              ? colors?.videoBg
+              : colors?.text
           }
         />
       </View>
@@ -105,13 +104,11 @@ export default function Meeting({
   }
   return (
     <DyteProvider value={client}>
-      <DyteUIProvider>
-        <DyteMeeting
-          meeting={client}
-          applyDesignSystem={false}
-          iOSScreenshareEnabled={true}
-        />
-      </DyteUIProvider>
+      <DyteMeeting
+        meeting={client}
+        applyDesignSystem={false}
+        iOSScreenshareEnabled={true}
+      />
     </DyteProvider>
   );
 }
