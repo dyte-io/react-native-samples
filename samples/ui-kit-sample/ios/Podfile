@@ -31,7 +31,7 @@ target 'rn_sample_app' do
       :mac_catalyst_enabled => false,
       # :ccache_enabled => true
     )
-    # Added for Dyte iOS Screenshare
+    # Added for RealtimeKit iOS Screenshare
     installer.pods_project.targets.each do |target|
       target.build_configurations.each do |config|
         config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'No'
@@ -54,6 +54,6 @@ target 'rn_sample_screenshare' do
     # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
-  # Support ReactNativeCore Pod in the Broadcast Upload Extension
-  pod 'ReactNativeCore', :path => '../node_modules/@dytesdk/react-native-core'
+  # Support RealtimeKitCore Pod in the Broadcast Upload Extension
+  pod 'RealtimeKitCore', :path => '../node_modules/@cloudflare/realtimekit-react-native'
 end

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">rn_sample_app</string>
+    <string name="blob_provider_authority">com.rn_sample_app</string>
 </resources>

@@ -9,6 +9,6 @@
 
 # Add any project specific keep options here:
 -keep class androidx.core.app.CoreComponentFactory { *; }
--keep class io.webrtc.** { *; }
+-keep class realtimekit.org.webrtc.** { *; }
 -keep public class com.horcrux.svg.** {*;}
 -dontwarn org.chromium.build.BuildHooksAndroid

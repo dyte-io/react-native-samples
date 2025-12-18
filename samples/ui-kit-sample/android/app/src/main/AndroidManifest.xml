@@ -15,7 +15,7 @@
       <service 
         android:enabled="true"
         android:foregroundServiceType="mediaProjection|camera|microphone"
-        android:name="com.reactnativecore.ForegroundService"
+        android:name="com.cloudflare.realtimekit.ForegroundService"
         android:exported="true">
       </service>
       <activity
