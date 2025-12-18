@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">core_sample</string>
+    <string name="blob_provider_authority">com.core_sample</string>
 </resources>

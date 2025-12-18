@@ -4,19 +4,19 @@ import React from 'react';
 import { ScrollView, View } from 'react-native';
 import { useState } from 'react';
 import ParticipantTile from '../components/ParticipantTile';
-import { useDyteSelector } from '@dytesdk/react-native-core';
+import { useRealtimeKitSelector } from '@cloudflare/realtimekit-react-native';
 import MeetingControls from '../components/MeetingControls';
 import MeetingDetails from '../components/MeetingDetails';
 
 export default function MeetingScreen({ meeting }: { meeting: any }) {
-  const activeParticipants = useDyteSelector(m => m.participants.active);
+  const activeParticipants = useRealtimeKitSelector(m => m.participants.active);
 
   // Access Plugins
-  const plugins = useDyteSelector(m => m.plugins);
+  const plugins = useRealtimeKitSelector(m => m.plugins);
   // Access Chat messages
-  const chat = useDyteSelector(m => m.chat);
+  const chat = useRealtimeKitSelector(m => m.chat);
   // Access Polls
-  const polls = useDyteSelector(m => m.polls);
+  const polls = useRealtimeKitSelector(m => m.polls);
 
   const viewMode = meeting.participants.viewMode;
   const currentPage = meeting.participants.currentPage;

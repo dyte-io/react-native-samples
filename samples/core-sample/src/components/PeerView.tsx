@@ -1,10 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useEffect, useState } from 'react';
-import { MediaStream, RTCView } from '@dyteinternals/react-native-webrtc';
+import { MediaStream, RTCView } from '@cloudflare/react-native-webrtc';
 import { ActivityIndicator, View } from 'react-native';
 import UserAvatar from 'react-native-user-avatar';
 import { useRef } from 'react';
-import { useDyteSelector } from '@dytesdk/react-native-core';
+import { useRealtimeKitSelector } from '@cloudflare/realtimekit-react-native';
 
 type Props = {
   participant: any;
@@ -16,7 +16,7 @@ type Props = {
 
 export default function PeerView(props: Props) {
   const [peerStream, setPeerStream] = useState(new MediaStream(undefined));
-  const self = useDyteSelector(m => m.self);
+  const self = useRealtimeKitSelector(m => m.self);
   const { participant } = props;
   const {
     videoTrack,
@@ -92,7 +92,7 @@ export default function PeerView(props: Props) {
           <UserAvatar
             size={50}
             src={picture}
-            name={(name ?? 'Dyte').trim().length !== 0 ? name : 'Dyte'}
+            name={(name ?? 'Participant').trim().length !== 0 ? name : 'Participant'}
             bgColor={'#2160FD'}
             textColor={'#FFFFFF'}
           />

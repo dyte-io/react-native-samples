@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Dimensions, StyleProp, StyleSheet, View } from 'react-native';
-import { DyteParticipant, DyteSelf } from '@dytesdk/web-core';
-import { useDyteSelector } from '@dytesdk/react-native-core';
+import { RTKParticipant, RTKSelf } from '@cloudflare/realtimekit';
+import { useRealtimeKitSelector } from '@cloudflare/realtimekit-react-native';
 import PeerView from './PeerView';
-import DyteNameTag from './NameTag';
+import RTKNameTag from './NameTag';
 import { SvgXml } from 'react-native-svg';
 import defaultIcons from '../utils/icons';
 
@@ -13,19 +13,19 @@ export default function ({
   style,
   iconPack = defaultIcons,
 }: {
-  participant: DyteParticipant | DyteSelf;
+  participant: RTKParticipant | RTKSelf;
   config?: any;
   meeting?: any;
   style?: StyleProp<any>;
   iconPack?: any;
 }) {
-  const self = useDyteSelector(m => m.self);
+  const self = useRealtimeKitSelector(m => m.self);
   const isSelf = participant.id === self.id;
-  participant = useDyteSelector(
+  participant = useRealtimeKitSelector(
     m =>
       m.participants.joined.toArray().filter(p => p.id === participant.id)[0],
   );
-  const pCount = useDyteSelector(m => m.participants.active.toArray().length);
+  const pCount = useRealtimeKitSelector(m => m.participants.active.toArray().length);
   if (!participant && isSelf) {
     participant = self;
   }
@@ -126,7 +126,7 @@ export default function ({
       )}
       <View style={styles.bottomLeftContainer}>
         {!meeting ? (
-          <DyteNameTag participant={participant}>
+          <RTKNameTag participant={participant}>
             {participant.audioEnabled ? (
               <View style={styles.iconStyle}>
                 <SvgXml
@@ -136,7 +136,7 @@ export default function ({
                 />
               </View>
             ) : (
-              /* <DyteAudioVisualizer participant={participant} />*/
+              /* <RTKAudioVisualizer participant={participant} />*/
               <View style={styles.iconStyle}>
                 <SvgXml
                   xml={iconPack.mic_off.replace('currentColor', '#FF2D2D')}
@@ -145,9 +145,9 @@ export default function ({
                 />
               </View>
             )}
-          </DyteNameTag>
+          </RTKNameTag>
         ) : (
-          <DyteNameTag participant={self} meeting={meeting}>
+          <RTKNameTag participant={self} meeting={meeting}>
             {self.audioEnabled ? (
               <View style={styles.iconStyle}>
                 <SvgXml
@@ -165,7 +165,7 @@ export default function ({
                 />
               </View>
             )}
-          </DyteNameTag>
+          </RTKNameTag>
         )}
       </View>
     </View>

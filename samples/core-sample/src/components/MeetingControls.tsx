@@ -1,13 +1,13 @@
 import React from 'react';
-import { useDyteSelector } from '@dytesdk/react-native-core';
+import { useRealtimeKitSelector } from '@cloudflare/realtimekit-react-native';
 import { StyleSheet, TouchableHighlight, View } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 import defaultIcons from '../utils/icons';
 
 export default function MeetingControls() {
-  const self = useDyteSelector(m => m.self);
-  const client = useDyteSelector(m => m);
-  const { audioEnabled, videoEnabled } = useDyteSelector(m => m.self);
+  const self = useRealtimeKitSelector(m => m.self);
+  const client = useRealtimeKitSelector(m => m);
+  const { audioEnabled, videoEnabled } = useRealtimeKitSelector(m => m.self);
   const toggleVideo = async () => {
     if (videoEnabled) {
       self.disableVideo();
