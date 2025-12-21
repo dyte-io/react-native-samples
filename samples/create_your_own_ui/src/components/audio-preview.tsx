@@ -1,16 +1,16 @@
 import React from 'react';
-import DyteClient from '@dytesdk/web-core';
+import RealtimeKitClient from '@cloudflare/realtimekit';
 import {useEffect, useState} from 'react';
 import {
-  DyteAudioVisualizer,
-  DyteButton,
-  DyteIcon,
-  DyteSettingsAudio,
-  DyteText,
+  RtkAudioVisualizer,
+  RtkButton,
+  RtkIcon,
+  RtkSettingsAudio,
+  RtkText,
   defaultIconPack,
-} from '@dytesdk/react-native-ui-kit';
+} from '@cloudflare/realtimekit-react-native-ui';
 import {CustomStates, SetStates} from '../types';
-import {UIConfig, Theme} from '@dytesdk/react-native-ui-kit';
+import {UIConfig, Theme} from '@cloudflare/realtimekit-react-native-ui';
 import {View, StyleSheet} from 'react-native';
 import {Dropdown} from 'react-native-element-dropdown';
 
@@ -19,12 +19,12 @@ function AudioPreviewPreBuilt({
   meeting,
   states,
 }: {
-  meeting: DyteClient;
+  meeting: RealtimeKitClient;
   config: UIConfig;
   states: CustomStates;
   setStates: SetStates;
 }) {
-  return <DyteSettingsAudio meeting={meeting} states={states} />;
+  return <RtkSettingsAudio meeting={meeting} states={states} />;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -36,7 +36,7 @@ function AudioPreviewWithCustomUI({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setStates,
 }: {
-  meeting: DyteClient;
+  meeting: RealtimeKitClient;
   config: UIConfig;
   states: CustomStates;
   setStates: SetStates;
@@ -71,7 +71,7 @@ function AudioPreviewWithCustomUI({
   const renderItem = (item: any) => {
     return (
       <View style={styles.renderContainer}>
-        <DyteText style={styles.renderText}>{item.label}</DyteText>
+        <RtkText style={styles.renderText}>{item.label}</RtkText>
       </View>
     );
   };
@@ -114,7 +114,7 @@ function AudioPreviewWithCustomUI({
       {meeting.self.permissions.canProduceAudio === 'ALLOWED' && (
         <View>
           {/* eslint-disable-next-line react-native/no-inline-styles */}
-          <DyteText style={{marginVertical: 8}}>Microphone</DyteText>
+          <RtkText style={{marginVertical: 8}}>Microphone</RtkText>
           <View className="flex flex-row">
             <Dropdown
               style={styles.dropdown}
@@ -127,12 +127,12 @@ function AudioPreviewWithCustomUI({
               value={currentDeviceIndex}
               onChange={selectAudio}
             />
-            <DyteAudioVisualizer participant={meeting?.self} />
+            <RtkAudioVisualizer participant={meeting?.self} />
           </View>
         </View>
       )}
       <View>
-        <DyteButton
+        <RtkButton
           size="sm"
           variant="secondary"
           kind="button"
@@ -143,10 +143,10 @@ function AudioPreviewWithCustomUI({
           }}
           onClick={() => testAudio()}>
           <View className="flex flex-row p-2">
-            <DyteIcon icon={defaultIconPack.speaker} />
-            <DyteText>Test</DyteText>
+            <RtkIcon icon={defaultIconPack.speaker} />
+            <RtkText>Test</RtkText>
           </View>
-        </DyteButton>
+        </RtkButton>
       </View>
     </View>
   );

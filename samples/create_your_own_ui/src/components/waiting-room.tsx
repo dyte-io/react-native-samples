@@ -1,7 +1,7 @@
 import React from 'react';
-import {DyteWaitingScreen, useLanguage} from '@dytesdk/react-native-ui-kit';
-import {UIConfig} from '@dytesdk/react-native-ui-kit';
-import DyteClient from '@dytesdk/web-core';
+import {RtkWaitingScreen, useLanguage} from '@cloudflare/realtimekit-react-native-ui';
+import {UIConfig} from '@cloudflare/realtimekit-react-native-ui';
+import RealtimeKitClient from '@cloudflare/realtimekit';
 import {CustomStates, SetStates} from '../types';
 import {View} from 'react-native';
 
@@ -10,7 +10,7 @@ function WaitingRoom({
   meeting,
   config,
 }: {
-  meeting: DyteClient;
+  meeting: RealtimeKitClient;
   config: UIConfig;
   states: CustomStates;
   setStates: SetStates;
@@ -24,7 +24,7 @@ function WaitingRoom({
         backgroundColor: '#272727',
         // color: '#ffffff',
       }}>
-      <DyteWaitingScreen config={config} t={t} />
+      <RtkWaitingScreen config={config} t={t} />
     </View>
   );
 }

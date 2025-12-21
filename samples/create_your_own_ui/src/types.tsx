@@ -1,6 +1,6 @@
-import {DyteSidebar, States} from '@dytesdk/react-native-ui-kit';
+import {RtkSidebar, States} from '@cloudflare/realtimekit-react-native-ui';
 
-export type CustomSideBarTabs = typeof DyteSidebar | 'warnings';
+export type CustomSideBarTabs = typeof RtkSidebar | 'warnings';
 
 export type CustomStates = States & {
   activeMediaPreviewModal?: boolean;

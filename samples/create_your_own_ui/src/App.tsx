@@ -1,21 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import {
-  DyteProvider,
-  useDyteClient,
-  useDyteMeeting,
-} from '@dytesdk/react-native-core';
+  RealtimeKitProvider,
+  useRealtimeKitClient,
+  useRealtimeKitMeeting,
+} from '@cloudflare/realtimekit-react-native';
 import {
-  DyteUIProvider,
+  RtkUIProvider,
   UIConfig,
   defaultConfig,
   generateConfig,
-} from '@dytesdk/react-native-ui-kit';
+} from '@cloudflare/realtimekit-react-native-ui';
 import {DyteStateListenersUtils} from './dyte-state-listeners';
 import {CustomStates} from './types';
 import CustomDyteMeeting from './components/custom-dyte-meeting';
 
 function Meeting() {
-  const {meeting} = useDyteMeeting();
+  const {meeting} = useRealtimeKitMeeting();
   const [config, setConfig] = useState<UIConfig>(defaultConfig);
   const [states, setStates] = useState<CustomStates>({
     meeting: 'setup',
@@ -103,7 +103,7 @@ function Meeting() {
 }
 
 function App() {
-  const [meeting, initMeeting] = useDyteClient();
+  const [meeting, initMeeting] = useRealtimeKitClient();
 
   useEffect(() => {
     async function initalizeMeeting() {
@@ -133,11 +133,11 @@ function App() {
   }, [meeting]);
 
   return (
-    <DyteUIProvider>
-      <DyteProvider value={meeting}>
+    <RtkUIProvider>
+      <RealtimeKitProvider value={meeting}>
         <Meeting />
-      </DyteProvider>
-    </DyteUIProvider>
+      </RealtimeKitProvider>
+    </RtkUIProvider>
   );
 }
 

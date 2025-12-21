@@ -1,25 +1,25 @@
 import React from 'react';
 import {
-  DyteCameraToggle,
-  DyteChatToggle,
-  DyteControlbar,
-  DyteControlbarButton,
+  RtkCameraToggle,
+  RtkChatToggle,
+  RtkControlbar,
+  RtkControlbarButton,
   // DyteControlbarButton,
-  DyteLeaveButton,
-  DyteMicToggle,
-  DyteMoreToggle,
-  DyteMuteToggle,
+  RtkLeaveButton,
+  RtkMicToggle,
+  RtkMoreToggle,
+  RtkMuteToggle,
   // DyteParticipantToggle,
-  DytePluginsToggle,
+  RtkPluginsToggle,
   // DytePoll,
-  DytePollsToggle,
-  DyteRecordingToggle,
-  DyteScreenShareToggle,
-  DyteSettingsToggle,
+  RtkPollsToggle,
+  RtkRecordingToggle,
+  RtkScreenShareToggle,
+  RtkSettingsToggle,
   useLanguage,
-} from '@dytesdk/react-native-ui-kit';
-import {UIConfig, defaultIconPack} from '@dytesdk/react-native-ui-kit';
-import DyteClient from '@dytesdk/web-core';
+} from '@cloudflare/realtimekit-react-native-ui';
+import {UIConfig, defaultIconPack} from '@cloudflare/realtimekit-react-native-ui';
+import RealtimeKitClient from '@cloudflare/realtimekit';
 import {CustomStates, SetStates} from '../types';
 import {View} from 'react-native';
 
@@ -29,13 +29,13 @@ function ControlBarPreBuilt({
   states,
   config,
 }: {
-  meeting: DyteClient;
+  meeting: RealtimeKitClient;
   config: UIConfig;
   states: CustomStates;
   setStates: SetStates;
 }) {
   return (
-    <DyteControlbar
+    <RtkControlbar
       meeting={meeting}
       config={config}
       states={states}
@@ -52,7 +52,7 @@ function ControlBarWithCustomUI({
   config,
   setStates,
 }: {
-  meeting: DyteClient;
+  meeting: RealtimeKitClient;
   config: UIConfig;
   states: CustomStates;
   setStates: SetStates;
@@ -62,27 +62,27 @@ function ControlBarWithCustomUI({
     <>
       {states.activeMoreMenu && (
         <View className="absolute bottom-[60px] w-full">
-          <DyteMuteToggle meeting={meeting} />
-          <DyteRecordingToggle meeting={meeting} variant="horizontal" />
-          <DyteScreenShareToggle meeting={meeting} variant="horizontal" />
-          <DyteChatToggle
+          <RtkMuteToggle meeting={meeting} />
+          <RtkRecordingToggle meeting={meeting} variant="horizontal" />
+          <RtkScreenShareToggle meeting={meeting} variant="horizontal" />
+          <RtkChatToggle
             meeting={meeting}
             states={states}
             variant="horizontal"
           />
-          <DytePollsToggle
+          <RtkPollsToggle
             meeting={meeting}
             states={states}
             variant="horizontal"
           />
-          <DytePluginsToggle
+          <RtkPluginsToggle
             meeting={meeting}
             states={states}
             t={t}
             variant="horizontal"
           />
-          <DyteSettingsToggle states={states} variant="horizontal" />
-          <DyteControlbarButton
+          <RtkSettingsToggle states={states} variant="horizontal" />
+          <RtkControlbarButton
             variant="horizontal"
             onClick={() => {
               if (
@@ -115,14 +115,15 @@ function ControlBarWithCustomUI({
         </View>
       )}
       <View className="flex-row bg-black text-white justify-evenly">
-        <DyteMicToggle meeting={meeting} variant="horizontal" />
-        <DyteCameraToggle meeting={meeting} variant="horizontal" />
-        <DyteMoreToggle
+        <RtkMicToggle meeting={meeting} variant="horizontal" />
+        <RtkCameraToggle meeting={meeting} variant="horizontal" />
+        <RtkMoreToggle
+          meeting={meeting}
           iconPack={defaultIconPack}
           variant="horizontal"
           t={useLanguage()}
         />
-        <DyteLeaveButton t={t} />
+        <RtkLeaveButton t={t} />
       </View>
     </>
   );

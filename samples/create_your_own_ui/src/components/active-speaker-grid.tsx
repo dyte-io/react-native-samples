@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import type DyteClient from '@dytesdk/web-core';
-import {DyteParticipantTile} from '@dytesdk/react-native-ui-kit';
-import {Peer} from '@dytesdk/react-native-ui-kit/lib/typescript/types/dyte-client';
+import type RealtimeKitClient from '@cloudflare/realtimekit';
+import {RtkParticipantTile} from '@cloudflare/realtimekit-react-native-ui';
 import {Dimensions, View} from 'react-native';
-import {useDyteSelector} from '@dytesdk/react-native-core';
+import {useRealtimeKitSelector} from '@cloudflare/realtimekit-react-native';
+import { type RTKParticipant, type RTKSelf } from '@cloudflare/realtimekit';
 
-function ActiveSpeakerGrid({meeting}: {meeting: DyteClient}) {
+type Peer = RTKParticipant | RTKSelf;
+
+function ActiveSpeakerGrid({meeting}: {meeting: RealtimeKitClient}) {
   const [currentParticipant, setParticipant] = useState<Peer>(meeting.self);
-  const otherParticipants = useDyteSelector(m =>
+  const otherParticipants = useRealtimeKitSelector(m =>
     m.participants.joined.toArray(),
   );
   const dimensions = Dimensions.get('window');
@@ -31,7 +33,7 @@ function ActiveSpeakerGrid({meeting}: {meeting: DyteClient}) {
   return (
     <View className="flex justify-center items-center h-screen">
       <View className="flex justify-center items-center">
-        <DyteParticipantTile
+        <RtkParticipantTile
           meeting={meeting}
           participant={currentParticipant}
           style={{
@@ -46,7 +48,7 @@ function ActiveSpeakerGrid({meeting}: {meeting: DyteClient}) {
         style={{bottom: 100, right: 0}}>
         {otherParticipants.length > 0 &&
           otherParticipants.map((p, index) => (
-            <DyteParticipantTile
+            <RtkParticipantTile
               key={index}
               meeting={meeting}
               participant={p}
@@ -58,7 +60,7 @@ function ActiveSpeakerGrid({meeting}: {meeting: DyteClient}) {
             />
           ))}
         {currentParticipant !== meeting.self && (
-          <DyteParticipantTile
+          <RtkParticipantTile
             meeting={meeting}
             participant={meeting.self}
             // eslint-disable-next-line react-native/no-inline-styles

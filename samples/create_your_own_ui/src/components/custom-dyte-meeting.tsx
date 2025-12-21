@@ -1,6 +1,6 @@
 import React from 'react';
-import {UIConfig} from '@dytesdk/react-native-ui-kit';
-import DyteClient from '@dytesdk/web-core';
+import {UIConfig} from '@cloudflare/realtimekit-react-native-ui';
+import RealtimeKitClient from '@cloudflare/realtimekit';
 import {CustomStates, SetStates} from '../types';
 import InMeeting from './in-meeting';
 import MeetingLoading from './meeting-loading';
@@ -14,7 +14,7 @@ function CustomDyteMeeting({
   states,
   setStates,
 }: {
-  meeting: DyteClient;
+  meeting: RealtimeKitClient;
   config: UIConfig;
   states: CustomStates;
   setStates: SetStates;

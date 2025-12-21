@@ -1,13 +1,12 @@
-import DyteClient from '@dytesdk/web-core';
+import RealtimeKitClient from '@cloudflare/realtimekit';
 import {CustomStates} from './types';
-import {RoomLeftState} from '@dytesdk/react-native-ui-kit/lib/typescript/types/dyte-client';
 
 export class DyteStateListenersUtils {
   getStates: () => CustomStates;
 
   getStateSetter: () => (newState: CustomStates) => void;
 
-  getMeeting: () => DyteClient;
+  getMeeting: () => RealtimeKitClient;
 
   get states() {
     return this.getStates();
@@ -22,7 +21,7 @@ export class DyteStateListenersUtils {
   }
 
   constructor(
-    getMeeting: () => DyteClient,
+    getMeeting: () => RealtimeKitClient,
     getGlobalStates: () => CustomStates,
     getGlobalStateSetter: () => (newState: CustomStates) => void,
   ) {
@@ -56,7 +55,7 @@ export class DyteStateListenersUtils {
     this.updateStates({meeting: 'waiting'});
   };
 
-  private roomLeftListener = ({state}: {state: RoomLeftState}) => {
+  private roomLeftListener = ({state}: {state: any}) => {
     const states = this.states;
     if (states?.roomLeftState === 'disconnected') {
       this.updateStates({meeting: 'ended', roomLeftState: state});
@@ -104,8 +103,8 @@ export class DyteStateListenersUtils {
 
   addDyteEventListeners() {
     if (this.meeting.meta.viewType === 'LIVESTREAM') {
-      this.meeting.self.addListener(
-        'socketServiceRoomJoined',
+      this.meeting.stage.addListener(
+        'stageStatusUpdate',
         this.socketServiceRoomJoinedListener,
       );
     }
@@ -117,8 +116,8 @@ export class DyteStateListenersUtils {
       'mediaPermissionUpdate',
       this.mediaPermissionUpdateListener,
     );
-    this.meeting.self.addListener(
-      'joinStageRequestAccepted',
+    this.meeting.stage.addListener(
+      'stageStatusUpdate',
       this.joinStateAcceptedListener,
     );
 

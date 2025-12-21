@@ -1,21 +1,21 @@
 import React from 'react';
-import type DyteClient from '@dytesdk/web-core';
+import type RealtimeKitClient from '@cloudflare/realtimekit';
 import {
   defaultIconPack,
-  DyteControlbarButton,
-  DyteText,
-  DyteTextField,
+  RtkControlbarButton,
+  RtkText,
+  RtkTextField,
   UIConfig,
-} from '@dytesdk/react-native-ui-kit';
+} from '@cloudflare/realtimekit-react-native-ui';
 import {CustomStates, SetStates} from '../types';
-import {DyteDialogManager, DyteSetupScreen} from '@dytesdk/react-native-ui-kit';
+import {RtkDialogManager, RtkSetupScreen} from '@cloudflare/realtimekit-react-native-ui';
 import {
-  DyteParticipantTile,
-  DyteMicToggle,
-  DyteCameraToggle,
-  DyteSettingsToggle,
-  DyteButton,
-} from '@dytesdk/react-native-ui-kit';
+  RtkParticipantTile,
+  RtkMicToggle,
+  RtkCameraToggle,
+  RtkSettingsToggle,
+  RtkButton,
+} from '@cloudflare/realtimekit-react-native-ui';
 import MediaPreviewModal from './media-preview-modal';
 import {useEffect, useState} from 'react';
 import {View} from 'react-native';
@@ -27,7 +27,7 @@ export function SetupScreenPreBuilt({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setStates,
 }: {
-  meeting: DyteClient;
+  meeting: RealtimeKitClient;
   config: UIConfig;
   states: CustomStates;
   setStates: SetStates;
@@ -40,8 +40,8 @@ export function SetupScreenPreBuilt({
         backgroundColor: '#272727',
         // color: '#ffffff',
       }}>
-      <DyteSetupScreen meeting={meeting} config={config} states={states} />
-      <DyteDialogManager meeting={meeting} config={config} states={states} />
+      <RtkSetupScreen meeting={meeting} config={config} states={states} />
+      <RtkDialogManager meeting={meeting} config={config} states={states} />
     </View>
   );
 }
@@ -53,7 +53,7 @@ export function CustomSetupScreenWithPrebuiltMediaPreviewModal({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setStates,
 }: {
-  meeting: DyteClient;
+  meeting: RealtimeKitClient;
   config: UIConfig;
   states: CustomStates;
   setStates: SetStates;
@@ -73,7 +73,7 @@ export function CustomSetupScreenWithPrebuiltMediaPreviewModal({
       <View
         key="on-setup-screen"
         className="flex items-center justify-center w-full h-full p-[5%] bg-black text-white">
-        <DyteParticipantTile
+        <RtkParticipantTile
           meeting={meeting}
           participant={meeting.self}
           config={config}
@@ -85,18 +85,18 @@ export function CustomSetupScreenWithPrebuiltMediaPreviewModal({
         />
         {/* </View> */}
         <View className="flex flex-row items-center justify-evenly w-full">
-          <DyteMicToggle meeting={meeting} size="sm" />
-          <DyteCameraToggle meeting={meeting} size="sm" />
-          <DyteSettingsToggle states={states} size="sm" />
+          <RtkMicToggle meeting={meeting} size="sm" />
+          <RtkCameraToggle meeting={meeting} size="sm" />
+          <RtkSettingsToggle states={states} size="sm" />
         </View>
         <View className="flex flex-col items-center justify-between w-full">
           <View className="flex flex-col items-center justify-center w-full p-[2%]">
             {/* eslint-disable-next-line react-native/no-inline-styles */}
-            <DyteText style={{marginVertical: 5}}>Joining as</DyteText>
-            <DyteText>{participantName}</DyteText>
+            <RtkText style={{marginVertical: 5}}>Joining as</RtkText>
+            <RtkText>{participantName}</RtkText>
           </View>
           <View className="flex flex-row items-center justify-center w-3/4 my-2">
-            <DyteTextField
+            <RtkTextField
               disabled={!meeting.self.permissions.canEditDisplayName}
               placeholder={meeting.self?.name ?? 'Your Name'}
               onChangeText={s => {
@@ -105,7 +105,7 @@ export function CustomSetupScreenWithPrebuiltMediaPreviewModal({
             />
           </View>
           <View className="flex flex-row items-center justify-center w-3/4">
-            <DyteButton
+            <RtkButton
               kind="wide"
               size="md"
               // eslint-disable-next-line react-native/no-inline-styles
@@ -118,12 +118,12 @@ export function CustomSetupScreenWithPrebuiltMediaPreviewModal({
                   await meeting.join();
                 }
               }}>
-              <DyteText>Join</DyteText>
-            </DyteButton>
+              <RtkText>Join</RtkText>
+            </RtkButton>
           </View>
         </View>
       </View>
-      <DyteDialogManager meeting={meeting} config={config} states={states} />
+      <RtkDialogManager meeting={meeting} config={config} states={states} />
     </>
   );
 }
@@ -134,7 +134,7 @@ export function CustomSetupScreenWithCustomMediaPreviewModal({
   states,
   setStates,
 }: {
-  meeting: DyteClient;
+  meeting: RealtimeKitClient;
   config: UIConfig;
   states: CustomStates;
   setStates: SetStates;
@@ -153,7 +153,7 @@ export function CustomSetupScreenWithCustomMediaPreviewModal({
       <View
         key="on-setup-screen"
         className="flex items-center justify-center w-full h-full p-[5%] bg-black text-white">
-        <DyteParticipantTile
+        <RtkParticipantTile
           meeting={meeting}
           participant={meeting.self}
           config={config}
@@ -164,9 +164,9 @@ export function CustomSetupScreenWithCustomMediaPreviewModal({
           }}
         />
         <View className="flex flex-row items-center justify-evenly w-full">
-          <DyteMicToggle meeting={meeting} size="sm" />
-          <DyteCameraToggle meeting={meeting} size="sm" />
-          <DyteControlbarButton
+          <RtkMicToggle meeting={meeting} size="sm" />
+          <RtkCameraToggle meeting={meeting} size="sm" />
+          <RtkControlbarButton
             onClick={() => {
               setStates(oldState => {
                 return {...oldState, activeMediaPreviewModal: true};
@@ -179,11 +179,11 @@ export function CustomSetupScreenWithCustomMediaPreviewModal({
         <View className="flex flex-col items-center justify-between w-full">
           <View className="flex flex-col items-center justify-center w-full p-[2%]">
             {/* eslint-disable-next-line react-native/no-inline-styles */}
-            <DyteText style={{marginVertical: 5}}>Joining as</DyteText>
-            <DyteText>{participantName}</DyteText>
+            <RtkText style={{marginVertical: 5}}>Joining as</RtkText>
+            <RtkText>{participantName}</RtkText>
           </View>
           <View className="flex flex-row items-center justify-center w-3/4 my-2">
-            <DyteTextField
+            <RtkTextField
               disabled={!meeting.self.permissions.canEditDisplayName}
               placeholder={meeting.self?.name ?? 'Your Name'}
               onChangeText={s => setParticipantName(s)}
@@ -194,7 +194,7 @@ export function CustomSetupScreenWithCustomMediaPreviewModal({
             />
           </View>
           <View className="flex flex-row items-center justify-center w-3/4">
-            <DyteButton
+            <RtkButton
               kind="wide"
               size="md"
               onClick={async () => {
@@ -205,8 +205,8 @@ export function CustomSetupScreenWithCustomMediaPreviewModal({
                   await meeting.join();
                 }
               }}>
-              <DyteText>Join</DyteText>
-            </DyteButton>
+              <RtkText>Join</RtkText>
+            </RtkButton>
           </View>
         </View>
       </View>
