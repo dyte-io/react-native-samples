@@ -19,7 +19,7 @@ export const initializeCallKeep = async (
   try {
     await RNCallKeep.setup({
       ios: {
-        appName: 'Dyte CallKit Demo',
+        appName: 'RealtimeKit CallKit Demo',
       },
       android: {
         alertTitle: 'Permissions required',

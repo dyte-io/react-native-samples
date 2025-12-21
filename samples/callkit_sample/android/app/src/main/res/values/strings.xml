@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">callkit_sample</string>
+    <string name="blob_provider_authority">com.callkit_sample</string>
 </resources>

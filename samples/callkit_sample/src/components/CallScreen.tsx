@@ -1,23 +1,23 @@
 import React, {useContext, useEffect} from 'react';
-import {useDyteSelector} from '@dytesdk/react-native-core';
+import {useRealtimeKitSelector} from '@cloudflare/realtimekit-react-native';
 import {
-  DyteGrid,
-  DyteControlbar,
-  DyteDialogManager,
-  DyteUIContext,
-} from '@dytesdk/react-native-ui-kit';
-import DyteClient from '@dytesdk/web-core';
+  RtkGrid,
+  RtkControlbar,
+  RtkDialogManager,
+  RtkUIContext,
+} from '@cloudflare/realtimekit-react-native-ui';
+import RealtimeKitClient from '@cloudflare/realtimekit';
 import WaitingScreen from './WaitingScreen';
 
 export default function CallScreen({
   meeting,
   onEnd,
 }: {
-  meeting: DyteClient;
+  meeting: RealtimeKitClient;
   onEnd: () => void;
 }) {
-  const {storeStates} = useContext(DyteUIContext);
-  const {roomJoined} = useDyteSelector(m => m.self);
+  const {storeStates} = useContext(RtkUIContext);
+  const {roomJoined} = useRealtimeKitSelector(m => m.self);
   useEffect(() => {
     meeting.self.addListener('roomLeft', () => onEnd());
     meeting.join();
@@ -31,9 +31,9 @@ export default function CallScreen({
   }
   return (
     <>
-      <DyteDialogManager meeting={meeting} states={storeStates} />
-      <DyteGrid meeting={meeting} aspectRatio={'4:3'} />
-      <DyteControlbar meeting={meeting} />
+      <RtkDialogManager meeting={meeting} states={storeStates} />
+      <RtkGrid meeting={meeting} aspectRatio={'4:3'} />
+      <RtkControlbar meeting={meeting} />
     </>
   );
 }
