@@ -42,7 +42,7 @@ const MeetingHeader: React.FC<MeetingHeaderProps> = ({
           justifyContent: 'flex-end',
           backgroundColor: 'black',
         }}>
-        <DyteClock meeting={meeting} />
+        <RtkClock meeting={meeting} />
       </View> */}
     </View>
   );

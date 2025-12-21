@@ -1,19 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useDyteSelector } from '@dytesdk/react-native-core';
-import { DyteUIProvider, DyteSpinner } from '@dytesdk/react-native-ui-kit';
+import { useRealtimeKitSelector } from '@cloudflare/realtimekit-react-native';
+import { RtkUIProvider, RtkSpinner } from '@cloudflare/realtimekit-react-native-ui';
 import MeetingHeader from '../components/MeetingHeader';
-import DyteClient from '@dytesdk/web-core';
+import RealtimeKitClient from '@cloudflare/realtimekit';
 import Grid from '../components/Grid';
 import ControlBar from '../components/ControlBar';
 import { Animated, View } from 'react-native';
 
 type MeetingProps = {
-  meeting: DyteClient;
+  meeting: RealtimeKitClient;
   meetStates: { states: any; setStates: any };
 };
 export default function Meeting({ meeting, meetStates }: MeetingProps) {
   const [isVisible, setIsVisible] = useState(true);
-  const { roomJoined } = useDyteSelector(m => m.self);
+  const { roomJoined } = useRealtimeKitSelector(m => m.self);
   const fadeAnim = useRef(new Animated.Value(1)).current;
   const toggleVisibility = () => {
     Animated.timing(fadeAnim, {
@@ -40,7 +40,7 @@ export default function Meeting({ meeting, meetStates }: MeetingProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <DyteUIProvider>
+    <RtkUIProvider>
       <>
         {roomJoined ? (
           <View className="flex-1">
@@ -64,10 +64,10 @@ export default function Meeting({ meeting, meetStates }: MeetingProps) {
           </View>
         ) : (
           <View className="flex-1 flex-row justify-center align-center">
-            <DyteSpinner />
+            <RtkSpinner />
           </View>
         )}
       </>
-    </DyteUIProvider>
+    </RtkUIProvider>
   );
 }

@@ -1,20 +1,20 @@
 import {
-  DyteCameraToggle,
-  DyteLeaveButton,
-  DyteMicToggle,
-  DyteSettingsToggle,
-} from '@dytesdk/react-native-ui-kit';
-import DyteClient from '@dytesdk/web-core';
+  RtkCameraToggle,
+  RtkLeaveButton,
+  RtkMicToggle,
+  RtkSettingsToggle,
+} from '@cloudflare/realtimekit-react-native-ui';
+import RealtimeKitClient from '@cloudflare/realtimekit';
 import React from 'react';
 import { View } from 'react-native';
 
-export default function ControlBar({ meeting }: { meeting: DyteClient }) {
+export default function ControlBar({ meeting }: { meeting: RealtimeKitClient }) {
   return (
     <View className="flex-row justify-evenly border-transparent items-center">
-      <DyteCameraToggle meeting={meeting} />
-      <DyteMicToggle meeting={meeting} />
-      <DyteSettingsToggle />
-      <DyteLeaveButton />
+      <RtkCameraToggle meeting={meeting} />
+      <RtkMicToggle meeting={meeting} />
+      <RtkSettingsToggle />
+      <RtkLeaveButton />
     </View>
   );
 }

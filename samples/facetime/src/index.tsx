@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import Contacts from './screens/Contacts';
 import Meeting from './screens/Meeting';
-import DyteClient from '@dytesdk/web-core';
-import { DyteProvider } from '@dytesdk/react-native-core';
+import RealtimeKitClient from '@cloudflare/realtimekit';
+import { RealtimeKitProvider } from '@cloudflare/realtimekit-react-native';
 
 type States = {
   callState: string;
-  call: DyteClient;
+  call: RealtimeKitClient;
 };
 
-export default function DyteFacetime() {
+export default function RtkFacetime() {
   const initialState: States = {
     callState: 'ended',
     call: {} as any,
@@ -21,9 +21,9 @@ export default function DyteFacetime() {
     return <Contacts meetStates={{ states, setStates }} />;
   } else {
     return (
-      <DyteProvider value={states.call}>
+      <RealtimeKitProvider value={states.call}>
         <Meeting meeting={states.call} meetStates={{ states, setStates }} />
-      </DyteProvider>
+      </RealtimeKitProvider>
     );
   }
 }
