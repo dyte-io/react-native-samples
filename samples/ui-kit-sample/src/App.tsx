@@ -1,14 +1,14 @@
 /* eslint-disable react-native/no-inline-styles */
 import {
-  DyteButton,
-  DyteLogo,
-  DyteText,
-  DyteUIProvider,
-  provideDyteDesignSystem,
+  RtkButton,
+  RtkLogo,
+  RtkText,
+  RtkUIProvider,
+  provideRtkDesignSystem,
   generateBackgroundColors,
   generateBrandColors,
-  DyteUIContext,
-} from '@dytesdk/react-native-ui-kit';
+  RtkUIContext,
+} from '@cloudflare/realtimekit-react-native-ui';
 import React, {useContext, useEffect, useState} from 'react';
 import {
   KeyboardAvoidingView,
@@ -90,21 +90,21 @@ function CreateMeeting({onCreate, colors}: {onCreate: any; colors: any}) {
         return null;
       case 1:
         return (
-          <DyteText size="sm" style={styles.errorText}>
+          <RtkText size="sm" style={styles.errorText}>
             Please provide a valid meeting title
-          </DyteText>
+          </RtkText>
         );
       case 2:
         return (
-          <DyteText size="sm" style={styles.errorText}>
+          <RtkText size="sm" style={styles.errorText}>
             Please provide a valid name
-          </DyteText>
+          </RtkText>
         );
       default:
         return (
-          <DyteText size="sm" style={styles.errorText}>
+          <RtkText size="sm" style={styles.errorText}>
             Failed to create meeting: {error.toString()}
-          </DyteText>
+          </RtkText>
         );
     }
   };
@@ -137,7 +137,7 @@ function CreateMeeting({onCreate, colors}: {onCreate: any; colors: any}) {
   });
   return (
     <View style={styles.container}>
-      <DyteText style={{fontSize: 30}}>Create Meeting</DyteText>
+      <RtkText style={{fontSize: 30}}>Create Meeting</RtkText>
       <View style={styles.inputField}>
         <TextInput
           style={styles.input}
@@ -161,12 +161,12 @@ function CreateMeeting({onCreate, colors}: {onCreate: any; colors: any}) {
         />
       </View>
       {showErrorCode(errorCode, errorMsg)}
-      <DyteButton
+      <RtkButton
         onClick={() => createMeetingAndJoin()}
         size={'md'}
         variant="primary">
-        <DyteText size="sm">Start Meeting</DyteText>
-      </DyteButton>
+        <RtkText size="sm">Start Meeting</RtkText>
+      </RtkButton>
     </View>
   );
 }
@@ -188,21 +188,21 @@ function JoinMeeting({onJoin, colors}: {onJoin: any; colors: any}) {
         return null;
       case 1:
         return (
-          <DyteText size="sm" style={styles.errorText}>
+          <RtkText size="sm" style={styles.errorText}>
             Please provide a valid meeting code
-          </DyteText>
+          </RtkText>
         );
       case 2:
         return (
-          <DyteText size="sm" style={styles.errorText}>
+          <RtkText size="sm" style={styles.errorText}>
             Please provide a valid name
-          </DyteText>
+          </RtkText>
         );
       default:
         return (
-          <DyteText size="sm" style={styles.errorText}>
+          <RtkText size="sm" style={styles.errorText}>
             Failed to create meeting: {error.toString()}
-          </DyteText>
+          </RtkText>
         );
     }
   };
@@ -273,7 +273,7 @@ function JoinMeeting({onJoin, colors}: {onJoin: any; colors: any}) {
   });
   return (
     <View style={styles.container}>
-      <DyteText style={{fontSize: 30}}>Join Meeting</DyteText>
+      <RtkText style={{fontSize: 30}}>Join Meeting</RtkText>
       <View style={styles.inputField}>
         <TextInput
           style={styles.input}
@@ -297,9 +297,9 @@ function JoinMeeting({onJoin, colors}: {onJoin: any; colors: any}) {
         />
       </View>
       {showErrorCode(errorCode, errorMsg)}
-      <DyteButton onClick={joinMeeting} size={'md'} variant="primary">
-        <DyteText size="sm">Join Meeting</DyteText>
-      </DyteButton>
+      <RtkButton onClick={joinMeeting} size={'md'} variant="primary">
+        <RtkText size="sm">Join Meeting</RtkText>
+      </RtkButton>
     </View>
   );
 }
@@ -339,7 +339,7 @@ function ChooseTheme({onTheme, colors}: {onTheme: any; colors: any}) {
   });
   return (
     <View style={styles.container}>
-      <DyteText style={{fontSize: 40}}>Choose Theme</DyteText>
+      <RtkText style={{fontSize: 40}}>Choose Theme</RtkText>
       <View style={styles.themeBox}>
         <TouchableHighlight
           onPress={() => {
@@ -449,7 +449,7 @@ function MeetingDashboard({
 }) {
   const {states, setStates} = meetStates;
   const {theme, setTheme} = meetTheme;
-  const {storeStates} = useContext(DyteUIContext);
+  const {storeStates} = useContext(RtkUIContext);
   const colors = storeStates.designSystem?.colors;
   const themes = [
     {
@@ -476,7 +476,7 @@ function MeetingDashboard({
   useEffect(() => {
     const themeObj = themes.filter(val => val.background === theme)[0];
     if (themeObj) {
-      provideDyteDesignSystem({
+      provideRtkDesignSystem({
         colors: {
           ...colors,
           brand: generateBrandColors(themeObj.brand),
@@ -504,7 +504,7 @@ function MeetingDashboard({
             paddingTop: 50,
             backgroundColor: theme,
           }}>
-          <DyteLogo style={{width: 100, backgroundColor: theme}} />
+          <RtkLogo style={{width: 100, backgroundColor: theme}} />
           <CreateMeeting
             onCreate={(config: any) => setStates(config)}
             colors={colors}
@@ -524,10 +524,16 @@ function MeetingDashboard({
     return (
       <Meeting
         authToken={states.authToken}
-        roomName={undefined}
-        onEnded={() => {
-          setStates({...states, startMeeting: false});
-          setTheme('#080808');
+        onEnded={() =>
+          {
+            setStates({ ...states, startMeeting: false });
+            setTheme('#080808');
+          }
+        }
+        colors={colors}
+        defaults={{
+          audio: true,
+          video: true,
         }}
       />
     );
@@ -541,11 +547,11 @@ export default function () {
   });
   const [theme, setTheme] = useState('#0B0B0B');
   return (
-    <DyteUIProvider>
+    <RtkUIProvider>
       <MeetingDashboard
         meetStates={{states, setStates}}
         meetTheme={{theme, setTheme}}
       />
-    </DyteUIProvider>
+    </RtkUIProvider>
   );
 }

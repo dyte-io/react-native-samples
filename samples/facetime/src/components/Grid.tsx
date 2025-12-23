@@ -1,9 +1,9 @@
 import {
-  DyteDialogManager,
-  DyteParticipantTile,
-  DyteSimpleGrid,
-  DyteUIContext,
-} from '@dytesdk/react-native-ui-kit';
+  RtkDialogManager,
+  RtkParticipantTile,
+  RtkSimpleGrid,
+  RtkUIContext,
+} from '@cloudflare/realtimekit-react-native-ui';
 import React, { useContext, useRef } from 'react';
 import {
   StyleSheet,
@@ -12,19 +12,19 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import DyteClient from '@dytesdk/web-core';
-import { useDyteSelector } from '@dytesdk/react-native-core';
+import RealtimeKitClient from '@cloudflare/realtimekit';
+import { useRealtimeKitSelector } from '@cloudflare/realtimekit-react-native';
 
 const Grid = ({
   meeting,
   onTap,
 }: {
-  meeting: DyteClient;
+  meeting: RealtimeKitClient;
   onTap: () => void;
 }) => {
-  const { storeStates } = useContext(DyteUIContext);
+  const { storeStates } = useContext(RtkUIContext);
   const pan = useRef(new Animated.ValueXY()).current;
-  const participants = useDyteSelector(m => m.participants.active);
+  const participants = useRealtimeKitSelector(m => m.participants.active);
   const panResponder = useRef(
     PanResponder.create({
       onMoveShouldSetPanResponder: () => true,
@@ -44,8 +44,8 @@ const Grid = ({
   if (participants.toArray().length === 0) {
     return (
       <>
-        <DyteDialogManager meeting={meeting} states={storeStates} />
-        <DyteParticipantTile
+        <RtkDialogManager meeting={meeting} states={storeStates} />
+        <RtkParticipantTile
           meeting={meeting}
           participant={meeting.self}
           style={{
@@ -58,12 +58,12 @@ const Grid = ({
   }
   return (
     <>
-      <DyteDialogManager meeting={meeting} states={storeStates} />
+      <RtkDialogManager meeting={meeting} states={storeStates} />
       <TouchableOpacity
         activeOpacity={1}
         onPress={() => onTap()}
         className="absolute top-0 left-0 right-0 bottom-0 z-0">
-        <DyteSimpleGrid
+        <RtkSimpleGrid
           meeting={meeting}
           participants={participants.toArray()}
         />
@@ -78,7 +78,7 @@ const Grid = ({
             zIndex: 20,
           },
         ]}>
-        <DyteParticipantTile
+        <RtkParticipantTile
           meeting={meeting}
           participant={meeting.self}
           // eslint-disable-next-line react-native/no-inline-styles

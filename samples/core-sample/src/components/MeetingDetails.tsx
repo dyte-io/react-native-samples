@@ -1,9 +1,9 @@
 import React from 'react';
-import { useDyteSelector } from '@dytesdk/react-native-core';
+import { useRealtimeKitSelector } from '@cloudflare/realtimekit-react-native';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function MeetingDetails() {
-  const title = useDyteSelector(m => m.meta.meetingTitle);
+  const title = useRealtimeKitSelector(m => m.meta.meetingTitle);
   const styles = StyleSheet.create({
     container: {
       flex: 1,

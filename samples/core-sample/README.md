@@ -1,6 +1,6 @@
 ## React Native Core Sample App
 
-This is a sample app made using Dyte's React Native UI Kit SDK written in Typescript and React Native.
+This is a sample app made using RealtimeKit's React Native UI Kit SDK written in Typescript and React Native.
 
 ## Steps to run
 

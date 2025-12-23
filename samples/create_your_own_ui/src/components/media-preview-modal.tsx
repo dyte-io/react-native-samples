@@ -1,15 +1,15 @@
 import React from 'react';
 import {
-  DyteButton,
-  DyteDialog,
-  DyteIcon,
-  DyteText,
+  RtkButton,
+  RtkDialog,
+  RtkIcon,
+  RtkText,
   defaultIconPack,
   useLanguage,
-} from '@dytesdk/react-native-ui-kit';
+} from '@cloudflare/realtimekit-react-native-ui';
 import {useState} from 'react';
-import DyteClient from '@dytesdk/web-core';
-import {UIConfig} from '@dytesdk/react-native-ui-kit';
+import RealtimeKitClient from '@cloudflare/realtimekit';
+import {UIConfig} from '@cloudflare/realtimekit-react-native-ui';
 import AudioPreview from './audio-preview';
 import VideoPreview from './video-preview';
 import {CustomStates, SetStates} from '../types';
@@ -26,16 +26,16 @@ function MediaPreviewModal({
   config: UIConfig;
   states: CustomStates;
   setStates: SetStates;
-  meeting: DyteClient;
+  meeting: RealtimeKitClient;
 }) {
   const [activeTab, setActiveTab] = useState<'audio' | 'video' | 'none'>(
     'none',
   );
   const t = useLanguage();
   return (
-    <DyteDialog
+    <RtkDialog
       open={open}
-      onDyteDialogClose={() =>
+      onRtkDialogClose={() =>
         setStates((oldState: CustomStates) => {
           return {
             ...oldState,
@@ -53,45 +53,45 @@ function MediaPreviewModal({
         <View className="flex flex-col">
           {activeTab !== 'none' && (
             <View className="relative px-0 py-0">
-              <DyteButton
+              <RtkButton
                 size="sm"
                 variant="secondary"
                 onClick={() => setActiveTab('none')}>
-                <DyteIcon icon={defaultIconPack.chevron_left} />
-              </DyteButton>
+                <RtkIcon icon={defaultIconPack.chevron_left} />
+              </RtkButton>
             </View>
           )}
           <View className="flex justify-center items-center h-[50px]">
-            <DyteText>Media Preview</DyteText>
+            <RtkText>Media Preview</RtkText>
           </View>
           {activeTab === 'none' && (
             <>
               {meeting.self.permissions.canProduceAudio === 'ALLOWED' && (
                 <View className="m-1">
-                  <DyteButton
+                  <RtkButton
                     size="sm"
                     variant="secondary"
                     kind="wide"
                     onClick={() => setActiveTab('audio')}>
                     <View className="flex flex-row">
-                      <DyteText>Audio</DyteText>
-                      <DyteIcon icon={defaultIconPack.mic_on} />
+                      <RtkText>Audio</RtkText>
+                      <RtkIcon icon={defaultIconPack.mic_on} />
                     </View>
-                  </DyteButton>
+                  </RtkButton>
                 </View>
               )}
               {meeting.self.permissions.canProduceVideo === 'ALLOWED' && (
                 <View className="m-1">
-                  <DyteButton
+                  <RtkButton
                     size="sm"
                     variant="secondary"
                     kind="wide"
                     onClick={() => setActiveTab('video')}>
                     <View className="flex flex-row">
-                      <DyteText>Video</DyteText>
-                      <DyteIcon icon={defaultIconPack.video_on} />
+                      <RtkText>Video</RtkText>
+                      <RtkIcon icon={defaultIconPack.video_on} />
                     </View>
-                  </DyteButton>
+                  </RtkButton>
                 </View>
               )}
             </>
@@ -114,7 +114,7 @@ function MediaPreviewModal({
           )}
         </View>
       </View>
-    </DyteDialog>
+    </RtkDialog>
   );
 }
 

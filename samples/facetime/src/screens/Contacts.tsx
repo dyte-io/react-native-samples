@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import MeetingTile from '../components/MeetingTile';
 import creds from '../creds';
 import { ScrollView, Text } from 'react-native';
-import { useDyteClient } from '@dytesdk/react-native-core';
+import { useRealtimeKitClient } from '@cloudflare/realtimekit-react-native';
 
 export default function Meetings({
   meetStates,
@@ -11,7 +11,7 @@ export default function Meetings({
   meetStates: { states: any; setStates: any };
 }) {
   const [apiMeetings, setAPIMeetings] = useState<[]>();
-  const [meeting, initMeeting] = useDyteClient();
+  const [meeting, initMeeting] = useRealtimeKitClient();
   useEffect(() => {
     const getMeetings = async () => {
       const Buffer = require('buffer').Buffer;

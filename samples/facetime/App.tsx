@@ -1,8 +1,8 @@
 import React from 'react';
-import DyteFacetime from './src';
+import RtkFacetime from './src';
 
 function App(): JSX.Element {
-  return <DyteFacetime />;
+  return <RtkFacetime />;
 }
 
 export default App;

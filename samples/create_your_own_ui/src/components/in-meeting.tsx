@@ -1,14 +1,14 @@
 import React from 'react';
-import type DyteClient from '@dytesdk/web-core';
+import type RealtimeKitClient from '@cloudflare/realtimekit';
 import {CustomStates, SetStates} from '../types';
 import {
-  DyteGrid,
-  DyteNotifications,
-  DyteDialogManager,
+  RtkGrid,
+  RtkNotifications,
+  RtkDialogManager,
   defaultIconPack,
   useLanguage,
   UIConfig,
-} from '@dytesdk/react-native-ui-kit';
+} from '@cloudflare/realtimekit-react-native-ui';
 import MeetingHeader from './meeting-header';
 import MeetingControlBar from './meeting-control-bar';
 import MeetingSideBar from './meeting-sidebar';
@@ -22,7 +22,7 @@ function InMeeting({
   states,
   setStates,
 }: {
-  meeting: DyteClient;
+  meeting: RealtimeKitClient;
   config: UIConfig;
   states: CustomStates;
   setStates: SetStates;
@@ -48,15 +48,15 @@ function InMeeting({
         />
       </View>
       <View
-        className="flex-1 justify-center items-center"
+        className="flex-1"
         // eslint-disable-next-line react-native/no-inline-styles
         style={{
           backgroundColor: '#272727',
           // color: '#ffffff',
         }}>
-        <DyteGrid meeting={meeting} config={config} states={states} />
+        <RtkGrid meeting={meeting} config={config} states={states} />
         {/* <ActiveSpeakerGrid meeting={meeting} /> */}
-        <DyteNotifications
+        <RtkNotifications
           meeting={meeting}
           config={config}
           states={states}
@@ -70,11 +70,11 @@ function InMeeting({
           states={states}
           setStates={setStates}
         />
-        <DyteDialogManager
+        <RtkDialogManager
           meeting={meeting}
           config={config}
           states={states}
-          onDyteStateUpdate={stateUpdate}
+          onRtkStateUpdate={stateUpdate}
         />
       </View>
       <View className="flex-0 flex-shrink">

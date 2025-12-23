@@ -1,21 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import {
-  DyteProvider,
-  useDyteClient,
-  useDyteMeeting,
-} from '@dytesdk/react-native-core';
+  RealtimeKitProvider,
+  useRealtimeKitClient,
+  useRealtimeKitMeeting,
+} from '@cloudflare/realtimekit-react-native';
 import {
-  DyteUIProvider,
+  RtkUIProvider,
   UIConfig,
   defaultConfig,
   generateConfig,
-} from '@dytesdk/react-native-ui-kit';
+} from '@cloudflare/realtimekit-react-native-ui';
 import {DyteStateListenersUtils} from './dyte-state-listeners';
 import {CustomStates} from './types';
 import CustomDyteMeeting from './components/custom-dyte-meeting';
 
 function Meeting() {
-  const {meeting} = useDyteMeeting();
+  const {meeting} = useRealtimeKitMeeting();
   const [config, setConfig] = useState<UIConfig>(defaultConfig);
   const [states, setStates] = useState<CustomStates>({
     meeting: 'setup',
@@ -103,12 +103,12 @@ function Meeting() {
 }
 
 function App() {
-  const [meeting, initMeeting] = useDyteClient();
+  const [meeting, initMeeting] = useRealtimeKitClient();
 
   useEffect(() => {
     async function initalizeMeeting() {
       const authToken =
-        'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdJZCI6IjcyNzNmYzAwLTAzY2MtNGMwNC1iZTliLTk4YzhhYmE4OTQxZSIsIm1lZXRpbmdJZCI6ImJiYmMyNzdkLTIzZTAtNDI4ZC1hNjE1LTNmNDgwZDBiOWJiZCIsInBhcnRpY2lwYW50SWQiOiJhYWExNDAzNi1mNmEyLTRlN2ItOTEwNS0yM2Q5ZDAwZDJjNTYiLCJwcmVzZXRJZCI6Ijg0ZWVjMTYxLWVmOWQtNGZlMi1iZTEzLTZkMDJlM2UwOTU5NSIsImlhdCI6MTc0MTY2OTk0OCwiZXhwIjoxNzUwMzA5OTQ4fQ.VsJq7dK0G9zjwD69Y-Ul855mjwhmDvtqjZpj-SIm4V2IUlSaOEyeaahvGfiE76PyJZNiBgNkih-bC8O349cebGsERIV2HXMf7V0f0QiPjypv7Q2V1_mn19yZgxOThwwa4U8ubKunVQnVPLKQVMbgqBBargqq2mFDXDPD3SzoOSO-X0afYvYa98BR7Li6vCQ0mO_60cf1bKbYaqNVvyqxiKbLOahquONz1_dxKSZGHD2CCj8lE6NgdSUmx3lBil8ZwVD9nIMfruGfOGeOMLjW_A0m3zdqfYhTCa1dAIrPXYnGl2oBueI1AZu5uJdKiVdOMpJFuuj3lz6jPDquvy7F-Q';
+        '<Auth-Token>';
 
       if (!authToken) {
         console.log(
@@ -133,11 +133,11 @@ function App() {
   }, [meeting]);
 
   return (
-    <DyteUIProvider>
-      <DyteProvider value={meeting}>
+    <RtkUIProvider>
+      <RealtimeKitProvider value={meeting}>
         <Meeting />
-      </DyteProvider>
-    </DyteUIProvider>
+      </RealtimeKitProvider>
+    </RtkUIProvider>
   );
 }
 

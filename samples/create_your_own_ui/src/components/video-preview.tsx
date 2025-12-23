@@ -1,14 +1,14 @@
 import React from 'react';
-import DyteClient from '@dytesdk/web-core';
+import RealtimeKitClient from '@cloudflare/realtimekit';
 import {useEffect, useState} from 'react';
 import {
-  DyteParticipantTile,
-  DyteSettingsVideo,
-  DyteText,
+  RtkParticipantTile,
+  RtkSettingsVideo,
+  RtkText,
   Theme,
-} from '@dytesdk/react-native-ui-kit';
+} from '@cloudflare/realtimekit-react-native-ui';
 import {CustomStates, SetStates} from '../types';
-import {UIConfig} from '@dytesdk/react-native-ui-kit';
+import {UIConfig} from '@cloudflare/realtimekit-react-native-ui';
 import {View, StyleSheet} from 'react-native';
 import {Dropdown} from 'react-native-element-dropdown';
 
@@ -17,12 +17,12 @@ function VideoPreviewPreBuilt({
   meeting,
   states,
 }: {
-  meeting: DyteClient;
+  meeting: RealtimeKitClient;
   config: UIConfig;
   states: CustomStates;
   setStates: SetStates;
 }) {
-  return <DyteSettingsVideo meeting={meeting} states={states} />;
+  return <RtkSettingsVideo meeting={meeting} states={states} />;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -32,7 +32,7 @@ function VideoPreviewWithCustomUI({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setStates,
 }: {
-  meeting: DyteClient;
+  meeting: RealtimeKitClient;
   config: UIConfig;
   states: CustomStates;
   setStates: SetStates;
@@ -81,7 +81,7 @@ function VideoPreviewWithCustomUI({
   const renderItem = (item: any) => {
     return (
       <View style={styles.renderContainer}>
-        <DyteText style={styles.renderText}>{item.label}</DyteText>
+        <RtkText style={styles.renderText}>{item.label}</RtkText>
       </View>
     );
   };
@@ -127,7 +127,7 @@ function VideoPreviewWithCustomUI({
     <View className="flex flex-col justify-center">
       <View>
         {meeting.self.videoEnabled === true ? (
-          <DyteParticipantTile
+          <RtkParticipantTile
             meeting={meeting}
             participant={meeting?.self}
             states={states}
@@ -140,7 +140,7 @@ function VideoPreviewWithCustomUI({
           />
         ) : (
           <View>
-            <DyteParticipantTile
+            <RtkParticipantTile
               meeting={meeting}
               participant={meeting?.self}
               // eslint-disable-next-line react-native/no-inline-styles
@@ -155,7 +155,7 @@ function VideoPreviewWithCustomUI({
       {meeting.self.permissions.canProduceVideo === 'ALLOWED' && (
         <View>
           {/* eslint-disable-next-line react-native/no-inline-styles */}
-          <DyteText style={{marginVertical: 8}}>Camera</DyteText>
+          <RtkText style={{marginVertical: 8}}>Camera</RtkText>
           <View className="flex flex-row">
             <Dropdown
               style={styles.dropdown}

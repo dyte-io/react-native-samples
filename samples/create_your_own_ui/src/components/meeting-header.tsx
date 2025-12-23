@@ -1,18 +1,18 @@
 import React from 'react';
 import {
-  DyteClock,
-  DyteGridPagination,
-  DyteHeader,
-  DyteLiveStreamIndicator,
-  DyteLogo,
-  DyteMeetingTitle,
-  DyteParticipantCount,
-  DyteRecordingIndicator,
+  RtkClock,
+  RtkGridPagination,
+  RtkHeader,
+  RtkLiveStreamIndicator,
+  RtkLogo,
+  RtkMeetingTitle,
+  RtkParticipantCount,
+  RtkRecordingIndicator,
   defaultIconPack,
   useLanguage,
-} from '@dytesdk/react-native-ui-kit';
-import {UIConfig} from '@dytesdk/react-native-ui-kit';
-import DyteClient from '@dytesdk/web-core';
+} from '@cloudflare/realtimekit-react-native-ui';
+import {UIConfig} from '@cloudflare/realtimekit-react-native-ui';
+import RealtimeKitClient from '@cloudflare/realtimekit';
 import {CustomStates, SetStates} from '../types';
 import {View} from 'react-native';
 
@@ -24,7 +24,7 @@ function HeaderPreBuilt({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setStates,
 }: {
-  meeting: DyteClient;
+  meeting: RealtimeKitClient;
   config: UIConfig;
   states: CustomStates;
   setStates: SetStates;
@@ -32,7 +32,7 @@ function HeaderPreBuilt({
   const t = useLanguage();
   const icons = defaultIconPack;
   return (
-    <DyteHeader
+    <RtkHeader
       meeting={meeting}
       iconPack={icons}
       t={t}
@@ -49,7 +49,7 @@ function HeaderWithCustomUI({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   config,
 }: {
-  meeting: DyteClient;
+  meeting: RealtimeKitClient;
   config: UIConfig;
   states: CustomStates;
   setStates: SetStates;
@@ -58,17 +58,17 @@ function HeaderWithCustomUI({
   return (
     <View className="flex justify-between bg-black text-white">
       <View className="flex items-center h-[24px]">
-        <DyteLogo meeting={meeting} />
-        <DyteRecordingIndicator meeting={meeting} />
-        <DyteLiveStreamIndicator meeting={meeting} />
+        <RtkLogo meeting={meeting} />
+        <RtkRecordingIndicator meeting={meeting} />
+        <RtkLiveStreamIndicator meeting={meeting} />
       </View>
       <View className="flex items-center h-[24px]">
-        <DyteMeetingTitle meeting={meeting} />
+        <RtkMeetingTitle meeting={meeting} />
       </View>
       <View className="flex items-center h-[24px]">
-        <DyteGridPagination meeting={meeting} states={states} />
-        <DyteParticipantCount meeting={meeting} t={t} />
-        <DyteClock meeting={meeting} />
+        <RtkGridPagination meeting={meeting} states={states} />
+        <RtkParticipantCount meeting={meeting} t={t} />
+        <RtkClock meeting={meeting} />
       </View>
     </View>
   );

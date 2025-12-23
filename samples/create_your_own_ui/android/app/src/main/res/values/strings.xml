@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">create_your_own_ui</string>
+    <string name="blob_provider_authority">com.create_your_own_ui</string>
 </resources>

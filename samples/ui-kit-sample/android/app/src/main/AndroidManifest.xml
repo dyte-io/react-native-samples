@@ -9,11 +9,14 @@
       android:icon="@mipmap/ic_launcher"
       android:roundIcon="@mipmap/ic_launcher_round"
       android:allowBackup="false"
-      android:theme="@style/AppTheme">
+      android:theme="@style/AppTheme"
+      android:supportsRtl="true"
+      android:exported="true">
       <service 
         android:enabled="true"
         android:foregroundServiceType="mediaProjection|camera|microphone"
-        android:name="com.reactnativecore.ForegroundService">
+        android:name="com.cloudflare.realtimekit.ForegroundService"
+        android:exported="true">
       </service>
       <activity
         android:name=".MainActivity"

@@ -10,11 +10,11 @@ import {
   ListRenderItem,
 } from 'react-native';
 import RNCallKeep from 'react-native-callkeep';
-import {DyteProvider, useDyteClient} from '@dytesdk/react-native-core';
+import {RealtimeKitProvider, useRealtimeKitClient} from '@cloudflare/realtimekit-react-native';
 import CallScreen from './CallScreen';
 import {reducer, initialState} from '../utils/states';
 import {getCurrentCallId, initializeCallKeep} from '../utils/call_handlers';
-import {DyteUIProvider} from '@dytesdk/react-native-ui-kit';
+import {RtkUIProvider} from '@cloudflare/realtimekit-react-native-ui';
 import database from '@react-native-firebase/database';
 
 interface Contact {
@@ -30,7 +30,7 @@ interface CallSession {
 
 const Dialer: React.FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [meeting, initMeeting] = useDyteClient();
+  const [meeting, initMeeting] = useRealtimeKitClient();
   const {number, ringing, inCall, ready} = state;
   const [currentCallId, setCurrentCallId] = useState<string | null>(null);
   const selfCallerID = 'randomid123';
@@ -354,11 +354,11 @@ const Dialer: React.FC = () => {
         )}
 
         {inCall && meeting && (
-          <DyteProvider value={meeting}>
-            <DyteUIProvider>
+          <RealtimeKitProvider value={meeting}>
+            <RtkUIProvider>
               <CallScreen meeting={meeting} onEnd={() => endCall()} />
-            </DyteUIProvider>
-          </DyteProvider>
+            </RtkUIProvider>
+          </RealtimeKitProvider>
         )}
       </View>
     </View>

@@ -1,14 +1,14 @@
 import React from 'react';
 import {
-  DyteChat,
-  DyteParticipants,
-  DytePlugins,
-  DytePolls,
-  DyteSidebar,
+  RtkChat,
+  RtkParticipants,
+  RtkPlugins,
+  RtkPolls,
+  RtkSidebar,
   // DyteSidebarUi,
-} from '@dytesdk/react-native-ui-kit';
-import {UIConfig} from '@dytesdk/react-native-ui-kit';
-import DyteClient from '@dytesdk/web-core';
+} from '@cloudflare/realtimekit-react-native-ui';
+import {UIConfig} from '@cloudflare/realtimekit-react-native-ui';
+import RealtimeKitClient from '@cloudflare/realtimekit';
 import {CustomStates, SetStates} from '../types';
 import {useState} from 'react';
 import {View} from 'react-native';
@@ -20,7 +20,7 @@ function SidebarPreBuilt({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setStates,
 }: {
-  meeting: DyteClient;
+  meeting: RealtimeKitClient;
   config: UIConfig;
   states: CustomStates;
   setStates: SetStates;
@@ -29,7 +29,7 @@ function SidebarPreBuilt({
     return null;
   }
   return (
-    <DyteSidebar
+    <RtkSidebar
       meeting={meeting}
       config={config}
       states={states}
@@ -46,7 +46,7 @@ function SidebarWithCustomUI({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setStates,
 }: {
-  meeting: DyteClient;
+  meeting: RealtimeKitClient;
   config: UIConfig;
   states: CustomStates;
   setStates: SetStates;
@@ -70,15 +70,15 @@ function SidebarWithCustomUI({
 
   return (
     <>
-      {currentTab === 'chat' && <DyteChat meeting={meeting} config={config} />}
+      {currentTab === 'chat' && <RtkChat meeting={meeting} config={config} />}
       {currentTab === 'polls' && (
-        <DytePolls meeting={meeting} config={config} />
+        <RtkPolls meeting={meeting} config={config} />
       )}
       {currentTab === 'participants' && (
-        <DyteParticipants meeting={meeting} config={config} states={states} />
+        <RtkParticipants meeting={meeting} config={config} states={states} />
       )}
       {currentTab === 'plugins' && (
-        <DytePlugins meeting={meeting} config={config} />
+        <RtkPlugins meeting={meeting} config={config} />
       )}
       {currentTab === 'warnings' && (
         <View className="flex justify-center items-center">

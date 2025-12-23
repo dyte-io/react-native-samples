@@ -1,12 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState } from 'react';
-import { useDyteClient, DyteProvider } from '@dytesdk/react-native-core';
+import { useRealtimeKitClient, RealtimeKitProvider } from '@cloudflare/realtimekit-react-native';
 import { Text, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import MeetingScreen from './Screens/MeetingScreen';
 
 export default function App() {
-  const [client, initClient] = useDyteClient();
+  const [client, initClient] = useRealtimeKitClient();
   const [roomJoined, setRoomJoined] = useState(false);
   const meetingOptions = {
     audio: true,
@@ -48,9 +48,9 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={{ flex: 1, backgroundColor: '#000' }}>
-        <DyteProvider value={client}>
+        <RealtimeKitProvider value={client}>
           <MeetingScreen meeting={client} />
-        </DyteProvider>
+        </RealtimeKitProvider>
       </SafeAreaView>
     </SafeAreaProvider>
   );

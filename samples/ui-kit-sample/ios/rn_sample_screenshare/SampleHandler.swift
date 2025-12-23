@@ -1,7 +1,7 @@
-import ReactNativeCore
+import RealtimeKitCore
 
-class SampleHandler: DyteScreenshareHandler {
+class SampleHandler: RTKScreenshareHandler {
  override init() {
-   super.init(appGroupIdentifier: "group.io.dyte.react-native", bundleIdentifier: "org.reactjs.native.example.rn-sample-app-1.rn-sample-screenshare")
+   super.init(appGroupIdentifier: "group.io.dyte.react-native", bundleIdentifier: "org.reactjs.native.example.ui-kit-sample.rn-sample-screenshare")
  }
 }
